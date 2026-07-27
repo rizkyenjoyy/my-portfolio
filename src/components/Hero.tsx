@@ -64,7 +64,7 @@ export default function Hero() {
             </p>
 
             {/* Status Panel */}
-            <div className="grid grid-cols-2 gap-3 bg-surface-secondary/30 p-4 rounded border border-border-subtle">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-surface-secondary/30 p-4 rounded border border-border-subtle">
               <div className="space-y-1">
                 <div className="text-xs font-mono text-text-tertiary uppercase">
                   Workshop Status
@@ -100,29 +100,29 @@ export default function Hero() {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap gap-3 pt-4">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 pt-4">
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() =>
                   document
                     .getElementById("case-files")
                     ?.scrollIntoView({ behavior: "smooth" })
                 }
-                className="flex items-center gap-2 px-6 py-3 bg-accent-orange text-surface-primary font-semibold rounded hover:bg-accent-orange/90 transition"
+                className="flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 bg-accent-orange text-surface-primary font-semibold rounded hover:bg-accent-orange/90 transition"
               >
                 <ExternalLink size={18} />
                 Inspect Case Files
               </motion.button>
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() =>
                   document
                     .getElementById("contact")
                     ?.scrollIntoView({ behavior: "smooth" })
                 }
-                className="flex items-center gap-2 px-6 py-3 border border-accent-orange text-accent-orange font-semibold rounded hover:bg-accent-orange/10 transition"
+                className="flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 border border-accent-orange text-accent-orange font-semibold rounded hover:bg-accent-orange/10 transition"
               >
                 <MessageSquare size={18} />
                 Start a Project
@@ -132,11 +132,12 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 download="CV-Rizky-Fauzi-Rimansyah.pdf"
+                className="w-full sm:w-auto"
               >
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex items-center gap-2 px-6 py-3 border border-border-subtle text-text-secondary font-semibold rounded hover:border-text-secondary transition"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 border border-border-subtle text-text-secondary font-semibold rounded hover:border-text-secondary transition"
                 >
                   <Download size={18} />
                   Download CV

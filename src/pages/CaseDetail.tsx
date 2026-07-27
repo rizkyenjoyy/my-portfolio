@@ -63,7 +63,7 @@ export default function CaseDetail() {
             </div>
 
             {/* Meta Information */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-border-subtle">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-border-subtle">
               <div>
                 <div className="text-xs font-mono text-text-tertiary uppercase mb-2">
                   Year
