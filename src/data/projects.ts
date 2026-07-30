@@ -11,6 +11,7 @@ export interface ProjectCase {
   solution: string;
   role: string;
   duration: string;
+  liveUrl?: string;
   technologies: string[];
   features: string[];
   challenges: {
@@ -210,6 +211,7 @@ export const projects: ProjectCase[] = [
       "Engineered an integrated web tourism platform using Laravel, PHP, and MySQL. Implemented reservation modules for lodgings, tours, and souvenirs along with unified order workflows, CRUD data management, and administration dashboards.",
     role: "Web Developer Intern",
     duration: "4 months (Apr 2026 – Jul 2026)",
+    liveUrl: "https://kuypangandaran.com",
     technologies: ["Laravel", "PHP", "MySQL", "Tailwind CSS", "JavaScript"],
     features: [
       "Accommodation & lodging reservation module",

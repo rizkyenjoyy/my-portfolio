@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { projects } from "@/data/projects";
-import { ExternalLink, FileText } from "lucide-react";
+import { ExternalLink, FileText, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface CaseFilesPreviewProps {
@@ -139,10 +139,25 @@ export default function CaseFilesPreview({
                     </div>
                   </div>
 
-                  {/* Summary */}
-                  <p className="mt-4 text-text-secondary text-sm leading-relaxed pt-4 border-t border-border-subtle">
-                    {project.summary}
-                  </p>
+                  {/* Summary & Live Link */}
+                  <div className="mt-4 pt-4 border-t border-border-subtle flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <p className="text-text-secondary text-sm leading-relaxed flex-grow">
+                      {project.summary}
+                    </p>
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent-orange/10 border border-accent-orange/30 text-accent-orange text-xs font-semibold rounded hover:bg-accent-orange/20 transition whitespace-nowrap self-start sm:self-center"
+                      >
+                        <Globe size={13} />
+                        {project.liveUrl.replace(/^https?:\/\//, '')}
+                        <ExternalLink size={11} />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </Link>
             </motion.div>

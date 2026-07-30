@@ -3,7 +3,7 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { projects } from "@/data/projects";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink, Globe } from "lucide-react";
 
 export default function CaseDetail() {
   const { slug } = useParams();
@@ -97,6 +97,25 @@ export default function CaseDetail() {
                 </div>
               </div>
             </div>
+
+            {/* Live Website Link */}
+            {project.liveUrl && (
+              <div className="pt-4 border-t border-border-subtle flex items-center justify-between flex-wrap gap-4">
+                <div className="text-sm text-text-secondary font-mono">
+                  Live Production Deployment:
+                </div>
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent-orange text-background font-bold rounded-lg hover:bg-accent-orange/90 transition shadow-lg shadow-accent-orange/20"
+                >
+                  <Globe size={18} />
+                  Visit Live Site ({project.liveUrl.replace(/^https?:\/\//, '')})
+                  <ExternalLink size={16} />
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </motion.section>
