@@ -1,31 +1,21 @@
 "use client";
 
 import Hero from "@/components/Hero";
-import About from "@/components/About";
-import ToolCabinet from "@/components/ToolCabinet";
 import CaseFilesPreview from "@/components/CaseFilesPreview";
+import ToolCabinet from "@/components/ToolCabinet";
 import WorkLog from "@/components/WorkLog";
+import About from "@/components/About";
 import Contact from "@/components/Contact";
 
 export default function Home() {
   return (
-    <div className="bg-background">
-      <section id="workshop">
-        <Hero />
-      </section>
-      <section id="about">
-        <About />
-      </section>
-      <section id="tools">
-        <ToolCabinet />
-      </section>
-      <section id="case-files">
-        <CaseFilesPreview limit={3} showViewAll={true} showHeader={true} />
-      </section>
+    <div className="bg-[#FAF7EE]">
+      <Hero />
+      <CaseFilesPreview limit={6} showViewAll={true} showHeader={true} />
+      <ToolCabinet />
       <WorkLog />
-      <section id="contact">
-        <Contact />
-      </section>
+      <About />
+      <Contact />
     </div>
   );
 }

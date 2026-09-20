@@ -2,8 +2,21 @@
 
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { projects } from "@/data/projects";
-import { ArrowLeft, ArrowRight, ExternalLink, Globe } from "lucide-react";
+import { projects, getAssetUrl } from "@/data/projects";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ExternalLink,
+  Globe,
+  Gamepad2,
+  Code2,
+  GraduationCap,
+  Layers,
+  Wrench,
+  CheckCircle2,
+  AlertTriangle,
+  FolderGit2,
+} from "lucide-react";
 
 export default function CaseDetail() {
   const { slug } = useParams();
@@ -11,16 +24,20 @@ export default function CaseDetail() {
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-text-primary mb-4">
-            Project not found
+      <div className="min-h-screen bg-[#FAF7EE] flex items-center justify-center p-4">
+        <div className="bg-[#FFFFFF] border-3 border-[#121212] shadow-brutal-lg p-8 max-w-md text-center space-y-4">
+          <div className="text-4xl">⚠️</div>
+          <h1 className="text-2xl font-black uppercase text-[#121212]">
+            MODULE NOT FOUND
           </h1>
+          <p className="font-mono text-xs text-[#4B5563]">
+            The requested project or case specification does not exist in the repository.
+          </p>
           <Link
             to="/case-files"
-            className="text-accent-orange hover:underline"
+            className="btn-brutal inline-block bg-[#FACC15] text-[#121212] border-2 border-[#121212] px-4 py-2 font-mono text-xs font-bold uppercase shadow-brutal-xs"
           >
-            Back to Case Files
+            ← Back to Repository
           </Link>
         </div>
       </div>
@@ -33,283 +50,261 @@ export default function CaseDetail() {
     currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
 
   return (
-    <div className="bg-background min-h-screen pt-20">
-      {/* Case Header */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="bg-surface-secondary border-b border-border-subtle py-12"
-      >
+    <div className="bg-[#FAF7EE] min-h-screen pb-16 bg-blueprint-grid">
+      
+      {/* Header Banner */}
+      <section className="border-b-3 border-[#121212] bg-[#FFFFFF] py-10 sm:py-12">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-6">
-            {/* Breadcrumb */}
+          
+          {/* Breadcrumb Navigation */}
+          <div className="flex items-center justify-between gap-4 mb-6">
             <Link
               to="/case-files"
-              className="inline-flex items-center gap-2 text-text-secondary hover:text-accent-orange transition"
+              className="btn-brutal inline-flex items-center gap-1.5 bg-[#FAF7EE] text-[#121212] border-2 border-[#121212] px-3.5 py-1.5 font-mono text-xs font-bold uppercase shadow-brutal-xs"
             >
-              <ArrowLeft size={16} />
-              Back to Case Files
+              <ArrowLeft className="w-4 h-4" />
+              <span>RETURN TO REPOSITORY</span>
             </Link>
 
-            {/* Title Section */}
-            <div className="space-y-4">
-              <div className="font-mono text-accent-orange font-semibold text-lg tracking-wider">
-                {project.caseNumber}
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-text-primary">
-                {project.title}
-              </h1>
-            </div>
-
-            {/* Meta Information */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-border-subtle">
-              <div>
-                <div className="text-xs font-mono text-text-tertiary uppercase mb-2">
-                  Year
-                </div>
-                <div className="text-lg font-semibold text-text-primary">
-                  {project.year}
-                </div>
-              </div>
-              <div>
-                <div className="text-xs font-mono text-text-tertiary uppercase mb-2">
-                  Status
-                </div>
-                <div className="inline-block px-2 py-1 bg-accent-green/10 text-accent-green text-xs font-semibold rounded">
-                  {project.status}
-                </div>
-              </div>
-              <div>
-                <div className="text-xs font-mono text-text-tertiary uppercase mb-2">
-                  Duration
-                </div>
-                <div className="text-lg font-semibold text-text-primary">
-                  {project.duration}
-                </div>
-              </div>
-              <div>
-                <div className="text-xs font-mono text-text-tertiary uppercase mb-2">
-                  Role
-                </div>
-                <div className="text-lg font-semibold text-text-primary">
-                  {project.role.split(" ")[0]}
-                </div>
-              </div>
-            </div>
-
-            {/* Live Website Link */}
-            {project.liveUrl && (
-              <div className="pt-4 border-t border-border-subtle flex items-center justify-between flex-wrap gap-4">
-                <div className="text-sm text-text-secondary font-mono">
-                  Live Production Deployment:
-                </div>
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent-orange text-background font-bold rounded-lg hover:bg-accent-orange/90 transition shadow-lg shadow-accent-orange/20"
-                >
-                  <Globe size={18} />
-                  Visit Live Site ({project.liveUrl.replace(/^https?:\/\//, '')})
-                  <ExternalLink size={16} />
-                </a>
-              </div>
-            )}
+            <span
+              className={`font-mono text-xs font-black uppercase px-3 py-1 border-2 border-[#121212] shadow-brutal-xs ${
+                project.category === "roblox"
+                  ? "bg-[#FACC15] text-[#121212]"
+                  : project.category === "web"
+                  ? "bg-[#06B6D4] text-[#121212]"
+                  : "bg-[#22C55E] text-[#121212]"
+              }`}
+            >
+              {project.category.toUpperCase()} MODULE
+            </span>
           </div>
-        </div>
-      </motion.section>
 
-      {/* Content Sections */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
-        {/* Executive Summary */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-2xl font-bold text-text-primary mb-6">
-            Executive Summary
-          </h2>
-          <p className="text-text-secondary text-lg leading-relaxed">
+          {/* Title and Identification */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-xs font-black bg-[#121212] text-[#FACC15] px-2.5 py-0.5 border border-black">
+                {project.caseNumber}
+              </span>
+              <span className="font-mono text-xs text-[#6B7280]">
+                CLASSIFICATION: {project.classification}
+              </span>
+            </div>
+
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase text-[#121212] tracking-tight">
+              {project.title}
+            </h1>
+          </div>
+
+          {/* Metadata Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 mt-8 border-t-2 border-[#121212]">
+            <div className="bg-[#FAF7EE] border-2 border-[#121212] p-3 shadow-brutal-xs">
+              <span className="font-mono text-[10px] uppercase text-[#6B7280] font-bold block mb-1">
+                TIMELINE / YEAR
+              </span>
+              <span className="font-mono text-sm sm:text-base font-extrabold text-[#121212]">
+                {project.year}
+              </span>
+            </div>
+
+            <div className="bg-[#FAF7EE] border-2 border-[#121212] p-3 shadow-brutal-xs">
+              <span className="font-mono text-[10px] uppercase text-[#6B7280] font-bold block mb-1">
+                STATUS
+              </span>
+              <span className="font-mono text-xs font-black px-2 py-0.5 bg-[#22C55E] text-black border border-black inline-block uppercase">
+                {project.status}
+              </span>
+            </div>
+
+            <div className="bg-[#FAF7EE] border-2 border-[#121212] p-3 shadow-brutal-xs">
+              <span className="font-mono text-[10px] uppercase text-[#6B7280] font-bold block mb-1">
+                DEVELOPMENT DURATION
+              </span>
+              <span className="font-mono text-sm sm:text-base font-extrabold text-[#121212]">
+                {project.duration}
+              </span>
+            </div>
+
+            <div className="bg-[#FAF7EE] border-2 border-[#121212] p-3 shadow-brutal-xs">
+              <span className="font-mono text-[10px] uppercase text-[#6B7280] font-bold block mb-1">
+                ENGINEER ROLE
+              </span>
+              <span className="font-mono text-xs sm:text-sm font-extrabold text-[#121212] truncate block">
+                {project.role}
+              </span>
+            </div>
+          </div>
+
+          {/* Optional Live Deployment Link */}
+          {project.liveUrl && (
+            <div className="mt-6 pt-4 border-t border-[#121212] flex flex-wrap items-center justify-between gap-4">
+              <span className="font-mono text-xs text-[#6B7280]">
+                {project.category === "roblox"
+                  ? "ROBLOX EXPERIENCE LINK:"
+                  : "LIVE PRODUCTION URL:"}
+              </span>
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-brutal inline-flex items-center gap-2 bg-[#EA580C] text-white border-2 border-[#121212] px-4 py-2 font-mono text-xs font-black uppercase shadow-brutal-xs hover:bg-[#C2410C] transition-colors"
+              >
+                {project.category === "roblox" ? (
+                  <Gamepad2 className="w-4 h-4" />
+                ) : (
+                  <Globe className="w-4 h-4" />
+                )}
+                <span>
+                  {project.category === "roblox"
+                    ? "PLAY ON ROBLOX"
+                    : "LAUNCH APPLICATION"}
+                </span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          )}
+
+        </div>
+      </section>
+
+      {/* Main Spec Content */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+        
+        {/* Executive Summary / Game Concept */}
+        <div className="bg-[#FFFFFF] border-3 border-[#121212] shadow-brutal-md p-6 sm:p-8 space-y-3">
+          <div className="flex items-center gap-2 border-b-2 border-[#121212] pb-3">
+            <span className="w-3 h-3 bg-[#FACC15] border border-black inline-block" />
+            <h2 className="font-mono text-sm font-black uppercase tracking-wider text-[#121212]">
+              {project.category === "roblox"
+                ? "GAME CONCEPT & NARRATIVE OVERVIEW"
+                : "PROJECT OVERVIEW & EXECUTIVE SUMMARY"}
+            </h2>
+          </div>
+          <p className="font-mono text-sm sm:text-base text-[#121212] leading-relaxed">
             {project.summary}
           </p>
-        </motion.section>
-
-        {/* Problem Statement */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-2xl font-bold text-text-primary mb-6">
-            Initial Problem
-          </h2>
-          <div className="bg-surface-secondary border border-border-subtle rounded p-6">
-            <p className="text-text-secondary leading-relaxed">{project.problem}</p>
-          </div>
-        </motion.section>
-
-        {/* Proposed Solution */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-2xl font-bold text-text-primary mb-6">
-            Proposed Solution
-          </h2>
-          <div className="bg-surface-secondary border border-border-subtle rounded p-6">
-            <p className="text-text-secondary leading-relaxed">{project.solution}</p>
-          </div>
-        </motion.section>
-
-        {/* Key Features */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-2xl font-bold text-text-primary mb-6">
-            Key Features
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {project.features.map((feature, index) => (
-              <motion.div
-                key={feature}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                viewport={{ once: true }}
-                className="flex gap-3 p-4 bg-surface-secondary border border-border-subtle rounded hover:border-accent-orange/50 transition"
-              >
-                <div className="w-2 h-2 rounded-full bg-accent-orange flex-shrink-0 mt-1.5" />
-                <span className="text-text-secondary">{feature}</span>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Technology Stack */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-2xl font-bold text-text-primary mb-6">
-            Technology Stack
-          </h2>
-          <div className="flex flex-wrap gap-3">
-            {project.technologies.map((tech) => (
-              <motion.div
-                key={tech}
-                whileHover={{ scale: 1.05 }}
-                className="px-4 py-2 bg-accent-orange/10 border border-accent-orange/30 text-accent-orange rounded font-medium hover:bg-accent-orange/20 transition cursor-pointer"
-              >
-                {tech}
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Challenges and Repairs */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-2xl font-bold text-text-primary mb-6">
-            Challenges and Repairs
-          </h2>
-          <div className="space-y-6">
-            {project.challenges.map((challenge, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-surface-secondary border border-border-subtle rounded p-6 space-y-4"
-              >
-                <div>
-                  <div className="text-xs font-mono text-accent-orange uppercase mb-2">
-                    Issue
-                  </div>
-                  <p className="text-text-secondary">{challenge.issue}</p>
-                </div>
-                <div>
-                  <div className="text-xs font-mono text-accent-orange uppercase mb-2">
-                    Diagnosis
-                  </div>
-                  <p className="text-text-secondary">{challenge.diagnosis}</p>
-                </div>
-                <div>
-                  <div className="text-xs font-mono text-accent-orange uppercase mb-2">
-                    Repair
-                  </div>
-                  <p className="text-text-secondary">{challenge.repair}</p>
-                </div>
-                <div>
-                  <div className="text-xs font-mono text-accent-green uppercase mb-2">
-                    Result
-                  </div>
-                  <p className="text-accent-green">{challenge.result}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
-      </div>
-
-      {/* Navigation Between Cases */}
-      <div className="border-t border-border-subtle bg-surface-secondary mt-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {previousProject ? (
-              <Link to={`/case/${previousProject.slug}`}>
-                <motion.div
-                  whileHover={{ x: -5 }}
-                  className="p-4 border border-border-subtle rounded hover:border-accent-orange/50 transition cursor-pointer"
-                >
-                  <div className="flex items-center gap-2 text-text-secondary mb-2">
-                    <ArrowLeft size={16} />
-                    Previous Case
-                  </div>
-                  <div className="text-lg font-bold text-text-primary">
-                    {previousProject.title}
-                  </div>
-                </motion.div>
-              </Link>
-            ) : (
-              <div />
-            )}
-            {nextProject ? (
-              <Link to={`/case/${nextProject.slug}`}>
-                <motion.div
-                  whileHover={{ x: 5 }}
-                  className="p-4 border border-border-subtle rounded hover:border-accent-orange/50 transition cursor-pointer text-right"
-                >
-                  <div className="flex items-center justify-end gap-2 text-text-secondary mb-2">
-                    Next Case
-                    <ArrowRight size={16} />
-                  </div>
-                  <div className="text-lg font-bold text-text-primary">
-                    {nextProject.title}
-                  </div>
-                </motion.div>
-              </Link>
-            ) : (
-              <div />
-            )}
-          </div>
         </div>
+
+        {/* Core Gameplay Loop / Tower Mechanics (if provided) */}
+        {project.gameplayLoop && project.gameplayLoop.length > 0 && (
+          <div className="bg-[#FFFFFF] border-3 border-[#121212] shadow-brutal-md p-6 sm:p-8 space-y-6">
+            <div className="flex items-center justify-between border-b-2 border-[#121212] pb-3">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 bg-[#EA580C] border border-black inline-block" />
+                <h2 className="font-mono text-sm font-black uppercase tracking-wider text-[#121212]">
+                  CORE GAMEPLAY LOOP &amp; TOWER MECHANICS
+                </h2>
+              </div>
+              <span className="font-mono text-[10px] bg-[#121212] text-[#FACC15] px-2 py-0.5 font-bold uppercase hidden sm:inline-block">
+                HOW TO PLAY &amp; SURVIVE
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {project.gameplayLoop.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="bg-[#FAF7EE] border-2 border-[#121212] p-4 shadow-brutal-xs flex flex-col justify-between space-y-3"
+                >
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-[10px] font-black bg-[#121212] text-[#FAF7EE] px-1.5 py-0.5 border border-black">
+                        {item.step}
+                      </span>
+                      {item.tag && (
+                        <span className="font-mono text-[9px] font-bold text-[#EA580C] uppercase">
+                          {item.tag}
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="font-mono text-xs sm:text-sm font-black text-[#121212] uppercase pt-1">
+                      {item.title}
+                    </h3>
+                    <p className="font-mono text-xs text-[#4B5563] leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Problem vs Solution Split (Engineering & Web Modules) */}
+        {project.category !== "roblox" && project.problem && project.solution && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            {/* Problem / Core Challenge */}
+            <div className="bg-[#FFFFFF] border-3 border-[#121212] shadow-brutal-md p-6 space-y-3">
+              <div className="flex items-center gap-2 border-b-2 border-[#121212] pb-3 text-[#EA580C]">
+                <AlertTriangle className="w-5 h-5" />
+                <h3 className="font-mono text-xs font-black uppercase tracking-wider text-[#121212]">
+                  CORE CHALLENGE / REQUIREMENT
+                </h3>
+              </div>
+              <p className="font-mono text-xs sm:text-sm text-[#4B5563] leading-relaxed">
+                {project.problem}
+              </p>
+            </div>
+
+            {/* Solution / Architecture */}
+            <div className="bg-[#FFFFFF] border-3 border-[#121212] shadow-brutal-md p-6 space-y-3">
+              <div className="flex items-center gap-2 border-b-2 border-[#121212] pb-3 text-[#22C55E]">
+                <CheckCircle2 className="w-5 h-5" />
+                <h3 className="font-mono text-xs font-black uppercase tracking-wider text-[#121212]">
+                  ARCHITECTURAL SOLUTION
+                </h3>
+              </div>
+              <p className="font-mono text-xs sm:text-sm text-[#4B5563] leading-relaxed">
+                {project.solution}
+              </p>
+            </div>
+
+          </div>
+        )}
+
+        {/* Previous & Next Navigation */}
+        <div className="pt-8 border-t-3 border-[#121212] grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {previousProject ? (
+            <Link
+              to={`/case/${previousProject.slug}`}
+              className="btn-brutal bg-[#FFFFFF] border-3 border-[#121212] p-4 shadow-brutal-xs flex items-center gap-3 group"
+            >
+              <ArrowLeft className="w-5 h-5 text-[#121212] group-hover:-translate-x-1 transition-transform" />
+              <div className="text-left">
+                <span className="font-mono text-[10px] text-[#6B7280] uppercase font-bold block">
+                  PREVIOUS MODULE
+                </span>
+                <span className="font-mono text-xs font-black uppercase text-[#121212] line-clamp-1">
+                  {previousProject.title}
+                </span>
+              </div>
+            </Link>
+          ) : (
+            <div />
+          )}
+
+          {nextProject ? (
+            <Link
+              to={`/case/${nextProject.slug}`}
+              className="btn-brutal bg-[#FFFFFF] border-3 border-[#121212] p-4 shadow-brutal-xs flex items-center justify-between group text-right"
+            >
+              <div className="text-right flex-grow">
+                <span className="font-mono text-[10px] text-[#6B7280] uppercase font-bold block">
+                  NEXT MODULE
+                </span>
+                <span className="font-mono text-xs font-black uppercase text-[#121212] line-clamp-1">
+                  {nextProject.title}
+                </span>
+              </div>
+              <ArrowRight className="w-5 h-5 text-[#121212] group-hover:translate-x-1 transition-transform ml-3" />
+            </Link>
+          ) : (
+            <div />
+          )}
+        </div>
+
       </div>
+
     </div>
   );
 }

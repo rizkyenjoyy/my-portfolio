@@ -1,219 +1,302 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Download, ExternalLink, MessageSquare } from "lucide-react";
-
+import {
+  Gamepad2,
+  Code2,
+  Terminal,
+  Layers,
+  ArrowRight,
+  ExternalLink,
+  Cpu,
+  Boxes,
+  Flame,
+  CheckCircle2,
+} from "lucide-react";
 
 export default function Hero() {
+  const scrollToProjects = (category?: string) => {
+    const el = document.getElementById("projects");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <section className="min-h-screen bg-background relative overflow-hidden pt-32 pb-20">
-      {/* Blueprint Grid Background */}
-      <div className="absolute inset-0 opacity-5">
-        <div
-          className="w-full h-full"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(30, 144, 255, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(30, 144, 255, 0.5) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-      </div>
-
-      {/* Scanning Line Animation */}
-      <motion.div
-        className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent-orange to-transparent"
-        animate={{ y: ["0%", "100%"] }}
-        transition={{ duration: 8, repeat: Infinity }}
-      />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
+    <section id="hero" className="pt-28 pb-16 bg-[#FAF7EE] relative overflow-hidden bg-blueprint-grid">
+      {/* Top Retro Marquee Ticker */}
+      <div className="w-full bg-[#121212] text-[#FACC15] py-2 border-y-3 border-[#121212] overflow-hidden mb-12 shadow-brutal-sm">
+        <div className="flex whitespace-nowrap font-mono text-xs sm:text-sm font-bold tracking-widest uppercase">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-8"
+            animate={{ x: [0, -1000] }}
+            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+            className="flex gap-8 items-center shrink-0"
           >
-            {/* Label */}
-            <div className="inline-flex items-center gap-2 bg-surface-secondary/50 px-3 py-2 rounded border border-border-subtle">
-              <div className="w-2 h-2 bg-accent-green rounded-full animate-pulse" />
-              <span className="text-xs font-mono text-text-secondary uppercase tracking-widest">
-                DIGITAL WORKSHOP — ONLINE
-              </span>
-            </div>
-
-            {/* Main Heading */}
-            <div className="space-y-4">
-              <h1 className="text-4xl md:text-6xl font-bold text-text-primary">
-                Rizky Fauzi
-                <br />
-                Rimansyah
-              </h1>
-              <h2 className="text-lg md:text-xl text-text-secondary font-medium">
-                Web Developer & Informatics Engineering Student
-              </h2>
-            </div>
-
-            {/* Description */}
-            <p className="text-text-secondary text-lg leading-relaxed max-w-md">
-              I design and build web-based systems that transform manual
-              processes into structured, efficient, and user-friendly digital
-              workflows. Based in Bandung with hands-on experience in Laravel,
-              React, and database systems.
-            </p>
-
-            {/* Status Panel */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-surface-secondary/30 p-4 rounded border border-border-subtle">
-              <div className="space-y-1">
-                <div className="text-xs font-mono text-text-tertiary uppercase">
-                  Workshop Status
-                </div>
-                <div className="text-sm font-semibold text-accent-green">
-                  Operational
-                </div>
-              </div>
-              <div className="space-y-1">
-                <div className="text-xs font-mono text-text-tertiary uppercase">
-                  Availability
-                </div>
-                <div className="text-sm font-semibold text-accent-orange">
-                  Open for Opportunities
-                </div>
-              </div>
-              <div className="space-y-1">
-                <div className="text-xs font-mono text-text-tertiary uppercase">
-                  Primary Focus
-                </div>
-                <div className="text-sm font-semibold text-text-primary">
-                  Web Applications
-                </div>
-              </div>
-              <div className="space-y-1">
-                <div className="text-xs font-mono text-text-tertiary uppercase">
-                  Location
-                </div>
-                <div className="text-sm font-semibold text-text-primary">
-                  Bandung, Indonesia
-                </div>
-              </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row flex-wrap gap-3 pt-4">
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() =>
-                  document
-                    .getElementById("case-files")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 bg-accent-orange text-surface-primary font-semibold rounded hover:bg-accent-orange/90 transition"
-              >
-                <ExternalLink size={18} />
-                Inspect Case Files
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() =>
-                  document
-                    .getElementById("contact")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 border border-accent-orange text-accent-orange font-semibold rounded hover:bg-accent-orange/10 transition"
-              >
-                <MessageSquare size={18} />
-                Start a Project
-              </motion.button>
-              <a
-                href="/needs/CVRizky.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                download="CV-Rizky-Fauzi-Rimansyah.pdf"
-                className="w-full sm:w-auto"
-              >
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 border border-border-subtle text-text-secondary font-semibold rounded hover:border-text-secondary transition"
-                >
-                  <Download size={18} />
-                  Download CV
-                </motion.button>
-              </a>
-            </div>
+            <span>🕹️ ROBLOX SCRIPTER</span>
+            <span className="text-white">///</span>
+            <span>💻 FULL-STACK WEB DEV</span>
+            <span className="text-white">///</span>
+            <span>⚡ LUAU &amp; GAMEPLAY MECHANICS</span>
+            <span className="text-white">///</span>
+            <span>🎮 9+ ROBLOX GAMES</span>
+            <span className="text-white">///</span>
+            <span>🚀 LARAVEL &amp; REACT</span>
+            <span className="text-white">///</span>
           </motion.div>
-
-          {/* Right Visual */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative h-96 hidden lg:flex items-center justify-center"
+            animate={{ x: [0, -1000] }}
+            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+            className="flex gap-8 items-center shrink-0"
           >
-            {/* Technical Blueprint Visual */}
-            <div className="relative w-full h-full">
-              {/* Outer Frame */}
-              <div className="absolute inset-0 border-2 border-accent-orange/30 rounded" />
-              <div className="absolute inset-4 border border-accent-orange/20 rounded" />
-
-              {/* Grid Pattern */}
-              <div className="absolute inset-0 opacity-20">
-                <div
-                  className="w-full h-full"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(rgba(245, 158, 11, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 158, 11, 0.3) 1px, transparent 1px)",
-                    backgroundSize: "20px 20px",
-                  }}
-                />
-              </div>
-
-              {/* Central Circle with Rotating Elements */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-accent-orange/40 rounded-full"
-              />
-
-              {/* Inner Circle */}
-              <motion.div
-                animate={{ rotate: -360 }}
-                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border border-accent-cyan/40 rounded-full"
-              />
-
-              {/* Nodes */}
-              {[0, 1, 2, 3].map((i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-2 h-2 bg-accent-orange rounded-full"
-                  style={{
-                    top: `${50 + 40 * Math.sin((i * Math.PI) / 2)}%`,
-                    left: `${50 + 40 * Math.cos((i * Math.PI) / 2)}%`,
-                  }}
-                  animate={{
-                    opacity: [0.5, 1, 0.5],
-                    scale: [1, 1.5, 1],
-                  }}
-                  transition={{
-                    duration: 2 + i * 0.5,
-                    repeat: Infinity,
-                  }}
-                />
-              ))}
-
-              {/* Text Labels */}
-              <div className="absolute bottom-8 left-8 text-xs font-mono text-text-tertiary space-y-1">
-                <div>SYSTEM_V:1.0</div>
-                <div>STATUS: OPERATIONAL</div>
-                <div>RFR_WORKSHOP_2025</div>
-              </div>
-            </div>
+            <span>🕹️ ROBLOX SCRIPTER</span>
+            <span className="text-white">///</span>
+            <span>💻 FULL-STACK WEB DEV</span>
+            <span className="text-white">///</span>
+            <span>⚡ LUAU &amp; GAMEPLAY MECHANICS</span>
+            <span className="text-white">///</span>
+            <span>🎮 9+ ROBLOX GAMES</span>
+            <span className="text-white">///</span>
+            <span>🚀 LARAVEL &amp; REACT</span>
+            <span className="text-white">///</span>
           </motion.div>
         </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Main Hero Header Block */}
+        <div className="text-center max-w-4xl mx-auto space-y-6 mb-16">
+          
+          {/* Status Badge */}
+          <div className="inline-flex items-center gap-2 bg-[#FACC15] text-[#121212] border-2 border-[#121212] px-4 py-1.5 font-mono text-xs sm:text-sm font-extrabold shadow-brutal-xs uppercase">
+            <span className="w-2.5 h-2.5 bg-[#22C55E] border border-black inline-block animate-pulse" />
+            <span>AVAILABLE FOR GAME DEV &amp; WEB DEV PROJECTS</span>
+          </div>
+
+          {/* Main Headline */}
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-[#121212] leading-[1.05] uppercase">
+            SCRIPTING GAMES.
+            <br />
+            <span className="inline-block bg-[#121212] text-[#FAF7EE] px-4 py-1 mt-2 border-3 border-[#121212] shadow-brutal transform -rotate-1">
+              CODING THE WEB.
+            </span>
+          </h1>
+
+          {/* Subheader */}
+          <p className="font-mono text-base sm:text-lg md:text-xl text-[#4B5563] max-w-2xl mx-auto leading-relaxed font-medium">
+            Roblox Scripter &amp; Web Developer based in Jakarta. Focusing on Luau gameplay scripting in <span className="text-[#121212] font-bold bg-[#FACC15]/40 px-1 border border-black">Roblox Studio</span> and building web apps with <span className="text-[#121212] font-bold bg-[#06B6D4]/30 px-1 border border-black">Laravel &amp; React</span>.
+          </p>
+
+          {/* Quick CTA Buttons */}
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+            <button
+              onClick={() => scrollToProjects()}
+              className="btn-brutal inline-flex items-center gap-2 bg-[#121212] text-[#FAF7EE] border-3 border-[#121212] px-6 py-3 font-mono text-sm sm:text-base font-bold shadow-brutal uppercase"
+            >
+              <span>EXPLORE ALL PROJECTS</span>
+              <ArrowRight className="w-5 h-5" />
+            </button>
+            <a
+              href="#contact"
+              className="btn-brutal inline-flex items-center gap-2 bg-[#FFFFFF] text-[#121212] border-3 border-[#121212] px-6 py-3 font-mono text-sm sm:text-base font-bold shadow-brutal uppercase"
+            >
+              <span>GET IN TOUCH / CONTACT</span>
+            </a>
+          </div>
+        </div>
+
+        {/* Dual Identity Section (2 Prominent Cards) */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+          
+          {/* Card 1: ROBLOX DEV */}
+          <div className="bg-[#FFFFFF] border-3 border-[#121212] shadow-brutal-lg p-6 sm:p-8 flex flex-col justify-between relative group hover:-translate-y-1 transition-transform">
+            
+            {/* Top Bar Header */}
+            <div>
+              <div className="flex items-center justify-between border-b-3 border-[#121212] pb-4 mb-6">
+                <div className="flex items-center gap-2">
+                  <div className="bg-[#FACC15] border-2 border-[#121212] p-2 shadow-brutal-xs">
+                    <Gamepad2 className="w-6 h-6 text-[#121212]" />
+                  </div>
+                  <div>
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#6B7280]">
+                      TRACK 01 // INTERACTIVE
+                    </span>
+                    <h3 className="text-2xl font-extrabold uppercase text-[#121212] tracking-tight">
+                      ROBLOX SCRIPTER
+                    </h3>
+                  </div>
+                </div>
+                <span className="bg-[#EA580C] text-white border-2 border-[#121212] font-mono text-xs font-black px-2.5 py-1 shadow-brutal-xs uppercase">
+                  GAMEPLAY SCRIPTER
+                </span>
+              </div>
+
+              {/* Isometric / Asset Visual Box */}
+              <div className="bg-[#F4EFE6] border-2 border-[#121212] p-4 mb-6 shadow-brutal-xs relative">
+                <div className="flex items-center justify-between text-xs font-mono font-bold border-b border-[#121212] pb-2 mb-3">
+                  <span className="flex items-center gap-1.5">
+                    <Boxes className="w-4 h-4 text-[#EA580C]" />
+                    <span>ENGINE: ROBLOX STUDIO</span>
+                  </span>
+                  <span className="bg-[#FACC15] text-black px-1.5 py-0.5 border border-black text-[10px]">
+                    LUAU / STUDIO
+                  </span>
+                </div>
+
+                {/* Simulated Wireframe / Logic Block */}
+                <div className="font-mono text-xs space-y-1.5 text-[#121212]">
+                  <div className="flex items-center justify-between bg-white border border-[#121212] px-2.5 py-1.5">
+                    <span className="text-[#6B7280]">Architecture:</span>
+                    <span className="font-bold">Client-Server OOP &amp; RemoteEvents</span>
+                  </div>
+                  <div className="flex items-center justify-between bg-white border border-[#121212] px-2.5 py-1.5">
+                    <span className="text-[#6B7280]">Specialization:</span>
+                    <span className="font-bold">Game Mechanics, AI &amp; State Logic</span>
+                  </div>
+                  <div className="flex items-center justify-between bg-white border border-[#121212] px-2.5 py-1.5">
+                    <span className="text-[#6B7280]">Persistence:</span>
+                    <span className="font-bold">ProfileService / DataStore Systems</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Core Competencies */}
+              <div className="space-y-2 mb-6">
+                <p className="font-mono text-xs font-bold uppercase text-[#6B7280]">
+                  // CORE FOCUS AREAS:
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    "Luau Scripting",
+                    "Modular OOP",
+                    "Custom Mechanics",
+                    "Client-Server Sync",
+                    "UI Scripting",
+                    "Mentorship PKL",
+                  ].map((skill) => (
+                    <span
+                      key={skill}
+                      className="bg-[#FAF7EE] border-2 border-[#121212] font-mono text-xs font-bold px-2.5 py-1 text-[#121212] shadow-brutal-xs"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Action */}
+            <div className="pt-4 border-t-2 border-[#121212]">
+              <a
+                href="#projects"
+                className="btn-brutal w-full flex items-center justify-center gap-2 bg-[#FACC15] text-[#121212] border-2 border-[#121212] py-3 font-mono text-sm font-extrabold shadow-brutal uppercase"
+              >
+                <span>EXPLORE ROBLOX GAMES (9)</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+
+          {/* Card 2: WEB DEV */}
+          <div className="bg-[#FFFFFF] border-3 border-[#121212] shadow-brutal-lg p-6 sm:p-8 flex flex-col justify-between relative group hover:-translate-y-1 transition-transform">
+            
+            {/* Top Bar Header */}
+            <div>
+              <div className="flex items-center justify-between border-b-3 border-[#121212] pb-4 mb-6">
+                <div className="flex items-center gap-2">
+                  <div className="bg-[#06B6D4] border-2 border-[#121212] p-2 shadow-brutal-xs">
+                    <Code2 className="w-6 h-6 text-[#121212]" />
+                  </div>
+                  <div>
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#6B7280]">
+                      TRACK 02 // SYSTEMS
+                    </span>
+                    <h3 className="text-2xl font-extrabold uppercase text-[#121212] tracking-tight">
+                      WEB DEVELOPER
+                    </h3>
+                  </div>
+                </div>
+                <span className="bg-[#2563EB] text-white border-2 border-[#121212] font-mono text-xs font-black px-2.5 py-1 shadow-brutal-xs uppercase">
+                  FULL-STACK
+                </span>
+              </div>
+
+              {/* Syntax Code Editor Mockup Box */}
+              <div className="bg-[#121212] text-[#FAF7EE] border-2 border-[#121212] p-4 mb-6 shadow-brutal-xs relative">
+                <div className="flex items-center justify-between text-xs font-mono border-b border-[#333333] pb-2 mb-3">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-3 h-3 bg-[#EF4444] border border-black inline-block" />
+                    <span className="w-3 h-3 bg-[#FACC15] border border-black inline-block" />
+                    <span className="w-3 h-3 bg-[#22C55E] border border-black inline-block" />
+                    <span className="text-[#9CA3AF] ml-2">AppEngine.tsx</span>
+                  </div>
+                  <span className="text-[#22C55E] text-[10px] font-bold">
+                    BUILD: PASSING
+                  </span>
+                </div>
+
+                {/* Code Lines */}
+                <div className="font-mono text-xs space-y-1 text-[#E5E7EB]">
+                  <p>
+                    <span className="text-[#F472B6]">const</span>{" "}
+                    <span className="text-[#38BDF8]">stack</span> = &#123;
+                  </p>
+                  <p className="pl-4">
+                    <span className="text-[#9CA3AF]">frontend:</span>{" "}
+                    <span className="text-[#FACC15]">["React", "TypeScript", "Tailwind"]</span>,
+                  </p>
+                  <p className="pl-4">
+                    <span className="text-[#9CA3AF]">backend:</span>{" "}
+                    <span className="text-[#4ADE80]">["Laravel", "PHP", "REST APIs"]</span>,
+                  </p>
+                  <p className="pl-4">
+                    <span className="text-[#9CA3AF]">database:</span>{" "}
+                    <span className="text-[#FB923C]">["MySQL", "Schema Design"]</span>,
+                  </p>
+                  <p>&#125;;</p>
+                </div>
+              </div>
+
+              {/* Core Competencies */}
+              <div className="space-y-2 mb-6">
+                <p className="font-mono text-xs font-bold uppercase text-[#6B7280]">
+                  // CORE FOCUS AREAS:
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    "Laravel & PHP",
+                    "React & Vite",
+                    "TypeScript",
+                    "Tailwind CSS",
+                    "MySQL Databases",
+                    "REST Architecture",
+                  ].map((skill) => (
+                    <span
+                      key={skill}
+                      className="bg-[#FAF7EE] border-2 border-[#121212] font-mono text-xs font-bold px-2.5 py-1 text-[#121212] shadow-brutal-xs"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Action */}
+            <div className="pt-4 border-t-2 border-[#121212]">
+              <a
+                href="#projects"
+                className="btn-brutal w-full flex items-center justify-center gap-2 bg-[#06B6D4] text-[#121212] border-2 border-[#121212] py-3 font-mono text-sm font-extrabold shadow-brutal uppercase"
+              >
+                <span>EXPLORE WEB APPLICATIONS (3)</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </section>
   );

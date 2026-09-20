@@ -1,123 +1,107 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { skills } from "@/data/projects";
+import { arsenalCategories } from "@/data/projects";
+import { Cpu, Wrench, Shield, Zap, Terminal } from "lucide-react";
 
 export default function ToolCabinet() {
-  const categories = [
-    { id: "backend", label: "Backend Tools", color: "accent-orange" },
-    { id: "frontend", label: "Frontend Tools", color: "accent-cyan" },
-    { id: "database", label: "Data Storage", color: "accent-green" },
-    { id: "devtools", label: "Development Tools", color: "accent-orange" },
-    { id: "other", label: "Deployment & Workflow", color: "text-secondary" },
-    { id: "gamedev", label: "Game Development", color: "accent-cyan" },
-  ];
-
   return (
-    <section className="py-20 bg-background relative">
+    <section id="arsenal" className="py-20 bg-[#FAF7EE] relative border-t-3 border-[#121212] bg-blueprint-grid">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mb-16 space-y-4"
-        >
-          <div className="inline-block bg-accent-cyan/10 px-3 py-2 rounded border border-accent-cyan/30">
-            <h2 className="text-sm font-mono text-accent-cyan uppercase tracking-widest">
-              TOOL CABINET
-            </h2>
+        
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-4 mb-14">
+          <div className="inline-flex items-center gap-2 bg-[#22C55E] text-black border-2 border-[#121212] px-3.5 py-1 font-mono text-xs font-bold uppercase shadow-brutal-xs">
+            <Cpu className="w-3.5 h-3.5" />
+            <span>INVENTORY MATRIX // WEAPONRY</span>
           </div>
-          <h3 className="text-3xl md:text-4xl font-bold text-text-primary">
-            Technologies used to inspect, construct, test, and deploy digital
-            systems
-          </h3>
-        </motion.div>
 
-        {/* Tools Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {categories.map((category, categoryIndex) => (
+          <h2 className="text-3xl sm:text-5xl font-extrabold uppercase text-[#121212] tracking-tight">
+            DEVELOPMENT ARSENAL &amp; STACK
+          </h2>
+
+          <p className="font-mono text-sm sm:text-base text-[#4B5563]">
+            Languages, frameworks, and tools I use for Roblox scripting and web development.
+          </p>
+        </div>
+
+        {/* Arsenal Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {arsenalCategories.map((category, catIndex) => (
             <motion.div
-              key={category.id}
+              key={category.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
+              transition={{ duration: 0.4, delay: catIndex * 0.1 }}
               viewport={{ once: true }}
-              className="space-y-4"
+              className="bg-[#FFFFFF] border-3 border-[#121212] shadow-brutal-md flex flex-col justify-between"
             >
               {/* Category Header */}
-              <div className="flex items-center gap-3 pb-4 border-b border-border-subtle">
+              <div>
                 <div
-                  className={`w-3 h-3 rounded-full ${
-                    category.color.includes("accent")
-                      ? category.color === "accent-orange"
-                        ? "bg-accent-orange"
-                        : "bg-accent-cyan"
-                      : "bg-accent-green"
-                  }`}
-                />
-                <h4 className="font-semibold text-text-primary uppercase text-sm tracking-wider">
-                  {category.label}
-                </h4>
-                <div className="flex-1 h-px bg-border-subtle" />
-              </div>
+                  className={`${category.color} ${category.textColor} border-b-3 border-[#121212] px-4 py-3 flex items-center justify-between`}
+                >
+                  <h3 className="font-mono font-black text-xs sm:text-sm uppercase tracking-wide">
+                    {category.name}
+                  </h3>
+                  <span className="font-mono text-[10px] font-bold px-1.5 py-0.5 bg-black text-white">
+                    SLOT {catIndex + 1}
+                  </span>
+                </div>
 
-              {/* Tools List */}
-              <div className="space-y-2">
-                {skills[category.id as keyof typeof skills].map(
-                  (tool, toolIndex) => (
-                    <motion.div
-                      key={tool}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{
-                        duration: 0.3,
-                        delay: (categoryIndex * 0.1 + toolIndex * 0.05),
-                      }}
-                      viewport={{ once: true }}
-                      className="group"
+                {/* Items List */}
+                <div className="p-4 space-y-3">
+                  {category.tools.map((tool, idx) => (
+                    <div
+                      key={tool.name}
+                      className="bg-[#FAF7EE] border-2 border-[#121212] p-2.5 shadow-brutal-xs hover:bg-[#FACC15]/20 transition-colors"
                     >
-                      <div className="flex items-center gap-3 p-3 rounded bg-surface-secondary/50 hover:bg-surface-secondary border border-border-subtle hover:border-accent-orange/50 transition cursor-pointer"
-                      >
-                        <div className="w-2 h-2 rounded-full bg-accent-orange/50 group-hover:bg-accent-orange transition" />
-                        <span className="text-text-secondary group-hover:text-text-primary transition text-sm">
-                          {tool}
+                      <div className="mb-1">
+                        <span className="font-mono font-bold text-xs text-[#121212]">
+                          {tool.name}
                         </span>
                       </div>
-                    </motion.div>
-                  )
-                )}
+                      <p className="font-mono text-[11px] text-[#4B5563] leading-tight">
+                        {tool.desc}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Card Footer Status */}
+              <div className="border-t-2 border-[#121212] bg-[#F3ECE1] px-4 py-2 font-mono text-[10px] text-[#6B7280] flex justify-between uppercase">
+                <span>CATEGORY</span>
+                <span className="font-bold text-black">{category.tools.length} SKILLS</span>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Additional Info */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mt-16 pt-16 border-t border-border-subtle"
-        >
-          <div className="bg-surface-secondary/30 p-6 rounded border border-border-subtle">
-            <div className="text-sm font-mono text-text-tertiary uppercase mb-4">
-              ✓ Certification & Recognition
+        {/* Arsenal Bottom Stat Banner */}
+        <div className="mt-12 bg-[#121212] text-[#FAF7EE] border-3 border-[#121212] shadow-brutal p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-4">
+            <div className="bg-[#FACC15] text-[#121212] p-3 border-2 border-white">
+              <Zap className="w-8 h-8" />
             </div>
-            <div className="space-y-2">
-              <p className="text-text-secondary">
-                • Oracle Academy - Database & Programming Fundamentals
-              </p>
-              <p className="text-text-secondary">
-                • Microsoft Excel - Advanced Spreadsheet Proficiency
-              </p>
-              <p className="text-text-secondary">
-                • TOEIC - Test of English for International Communication
+            <div>
+              <h4 className="text-lg font-bold font-mono text-[#FACC15] uppercase">
+                CODE QUALITY &amp; STRUCTURE
+              </h4>
+              <p className="font-mono text-xs sm:text-sm text-[#9CA3AF]">
+                Writing clean, modular Luau scripts and maintainable web systems.
               </p>
             </div>
           </div>
-        </motion.div>
+
+          <a
+            href="#contact"
+            className="btn-brutal bg-[#FACC15] text-[#121212] border-2 border-white px-5 py-2.5 font-mono text-xs font-black shadow-brutal-sm uppercase shrink-0"
+          >
+            REQUEST TECH SPECIFICATION →
+          </a>
+        </div>
+
       </div>
     </section>
   );

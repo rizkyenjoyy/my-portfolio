@@ -1,336 +1,268 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { Mail, MessageCircle, MapPin, ChevronDown, Check } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import {
+  Mail,
+  Copy,
+  Check,
+  Send,
+  Download,
+  Gamepad2,
+  MessageSquare,
+  Coins,
+  Globe,
+  Share2,
+  Terminal,
+} from "lucide-react";
+import { useState } from "react";
+import { getAssetUrl } from "@/data/projects";
 
-interface Option {
-  value: string;
-  label: string;
-}
-
-interface CustomSelectProps {
-  options: Option[];
-  value: string;
-  onChange: (value: string) => void;
-  placeholder: string;
-}
-
-function CustomSelect({ options, value, onChange, placeholder }: CustomSelectProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const selectedOption = options.find((opt) => opt.value === value);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setIsOpen(false);
-      }
-    };
-    if (isOpen) {
-      document.addEventListener("keydown", handleKeyDown);
-    }
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
-
+// Clean Pixel / Brutalist Social SVGs
+function GithubIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
-    <div className="relative w-full" ref={containerRef}>
-      <button
-        type="button"
-        onClick={() => setIsOpen(!isOpen)}
-        className={`w-full px-4 py-3 bg-surface-secondary border rounded text-left flex items-center justify-between transition-all duration-200 focus:outline-none ${
-          isOpen
-            ? "border-accent-orange ring-1 ring-accent-orange/30 shadow-[0_0_15px_rgba(245,158,11,0.15)]"
-            : "border-border-subtle hover:border-text-tertiary"
-        }`}
-        aria-haspopup="listbox"
-        aria-expanded={isOpen}
-      >
-        <span className={selectedOption ? "text-text-primary font-medium" : "text-text-tertiary"}>
-          {selectedOption ? selectedOption.label : placeholder}
-        </span>
-        <ChevronDown
-          size={18}
-          className={`text-text-tertiary transition-transform duration-300 ${
-            isOpen ? "rotate-180 text-accent-orange" : ""
-          }`}
-        />
-      </button>
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+    </svg>
+  );
+}
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8, scale: 0.98 }}
-            animate={{ opacity: 1, y: 4, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.98 }}
-            transition={{ duration: 0.15, ease: "easeOut" }}
-            className="absolute top-full left-0 right-0 z-50 bg-surface-primary border border-border-subtle rounded-lg shadow-2xl overflow-hidden backdrop-blur-xl py-1.5 mt-1"
-            role="listbox"
-          >
-            {options.map((option) => {
-              const isSelected = option.value === value;
-              return (
-                <button
-                  key={option.value}
-                  type="button"
-                  onClick={() => {
-                    onChange(option.value);
-                    setIsOpen(false);
-                  }}
-                  className={`w-full text-left px-4 py-2.5 text-sm flex items-center justify-between transition-colors duration-150 ${
-                    isSelected
-                      ? "bg-accent-orange/15 text-accent-orange font-medium"
-                      : "text-text-primary hover:bg-surface-secondary hover:text-accent-orange"
-                  }`}
-                  role="option"
-                  aria-selected={isSelected}
-                >
-                  <span>{option.label}</span>
-                  {isSelected && <Check size={16} className="text-accent-orange" />}
-                </button>
-              );
-            })}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+function LinkedinIcon({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+    </svg>
   );
 }
 
 export default function Contact() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [projectType, setProjectType] = useState("");
-  const [estimatedTimeline, setEstimatedTimeline] = useState("");
+  const [copied, setCopied] = useState(false);
+  const [discordCopied, setDiscordCopied] = useState(false);
+  const email = "rizkyfauziradit@gmail.com";
+  const discordUser = "kikyyy___";
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitted(true);
-    setProjectType("");
-    setEstimatedTimeline("");
-    setTimeout(() => setIsSubmitted(false), 3000);
+  const copyEmail = () => {
+    navigator.clipboard.writeText(email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
-  const projectTypeOptions: Option[] = [
-    { value: "web-app", label: "Web Application" },
-    { value: "info-system", label: "Information System" },
-    { value: "backend", label: "Backend Development" },
-    { value: "frontend", label: "Frontend Development" },
-    { value: "database", label: "Database Design" },
-    { value: "consultation", label: "Consultation" },
-  ];
+  const copyDiscord = () => {
+    navigator.clipboard.writeText(discordUser);
+    setDiscordCopied(true);
+    setTimeout(() => setDiscordCopied(false), 2500);
+  };
 
-  const timelineOptions: Option[] = [
-    { value: "1-2-weeks", label: "1-2 weeks" },
-    { value: "1-month", label: "1 month" },
-    { value: "2-3-months", label: "2-3 months" },
-    { value: "3-plus-months", label: "3+ months" },
-  ];
-
-  const contactLinks = [
+  const socials = [
     {
-      icon: Mail,
-      label: "Email",
-      value: "rizkyfauziradit@gmail.com",
-      href: "mailto:rizkyfauziradit@gmail.com",
+      name: "GitHub",
+      url: "https://github.com/rizkyenjoyy",
+      handle: "@rizkyenjoyy",
+      icon: GithubIcon,
+      tag: "REPO / CODE",
+      color: "bg-[#FFFFFF]",
     },
     {
-      icon: MessageCircle,
-      label: "WhatsApp",
-      value: "+62 813 8852 3035",
-      href: "https://wa.me/6281388523035",
+      name: "LinkedIn",
+      url: "https://www.linkedin.com/in/rizkyfauzir/",
+      handle: "in/rizkyfauzir",
+      icon: LinkedinIcon,
+      tag: "CAREER NETWORK",
+      color: "bg-[#06B6D4]",
     },
     {
-      icon: Mail,
-      label: "LinkedIn",
-      value: "Rizky Fauzi R.",
-      href: "https://linkedin.com/in/rizkyfauzir",
+      name: "Roblox",
+      url: "https://www.roblox.com/users/3744472194/profile",
+      handle: "Roblox Profile",
+      icon: Gamepad2,
+      tag: "GAMES & ASSETS",
+      color: "bg-[#EA580C]",
+      textWhite: true,
     },
     {
-      icon: Mail,
-      label: "GitHub",
-      value: "@rizkyenjoyy",
-      href: "https://github.com/rizkyenjoyy",
+      name: "Discord",
+      handle: `@${discordUser}`,
+      isDiscord: true,
+      icon: MessageSquare,
+      tag: "USERNAME",
+      color: "bg-[#5865F2]",
+      textWhite: true,
     },
   ];
 
   return (
-    <section className="py-20 bg-surface-secondary relative">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mb-16 space-y-4 text-center"
-        >
-          <div className="inline-block bg-accent-cyan/10 px-3 py-2 rounded border border-accent-cyan/30 mx-auto">
-            <h2 className="text-sm font-mono text-accent-cyan uppercase tracking-widest">
-              CONTACT STATION
-            </h2>
+    <section id="contact" className="py-20 bg-[#FAF7EE] relative border-t-3 border-[#121212] bg-arcade-grid">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+          <div className="inline-flex items-center gap-2 bg-[#FACC15] text-[#121212] border-2 border-[#121212] px-3.5 py-1 font-mono text-xs font-bold uppercase shadow-brutal-xs">
+            <Mail className="w-3.5 h-3.5" />
+            <span>COMMUNICATION CHANNEL // CONNECT</span>
           </div>
-          <h3 className="text-3xl md:text-4xl font-bold text-text-primary">
-            Submit a project request or start a professional conversation
-          </h3>
-        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
-          {contactLinks.map((link, index) => {
-            const Icon = link.icon;
-            return (
-              <motion.a
-                key={link.label}
-                href={link.href}
-                target={link.label !== "Email" ? "_blank" : undefined}
-                rel={link.label !== "Email" ? "noopener noreferrer" : undefined}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.02, borderColor: "rgb(245, 158, 11)" }}
-                className="bg-surface-primary border border-border-subtle rounded p-4 hover:bg-surface-secondary transition group"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded bg-accent-orange/10 group-hover:bg-accent-orange/20 transition flex items-center justify-center">
-                    <Icon
-                      size={20}
-                      className="text-accent-orange group-hover:text-accent-orange"
-                    />
-                  </div>
-                  <div>
-                    <div className="text-xs font-mono text-text-tertiary uppercase mb-1">
-                      {link.label}
-                    </div>
-                    <div className="text-sm font-semibold text-text-primary">
-                      {link.value}
-                    </div>
-                  </div>
-                </div>
-              </motion.a>
-            );
-          })}
+          <h2 className="text-3xl sm:text-5xl font-extrabold uppercase text-[#121212] tracking-tight">
+            LET'S WORK TOGETHER // GET IN TOUCH
+          </h2>
+
+          <p className="font-mono text-sm sm:text-base text-[#4B5563]">
+            Have a game development idea, a web system to build, or an exciting career opportunity? Let's connect!
+          </p>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="text-center mb-12 p-4 bg-surface-primary border border-border-subtle rounded"
-        >
-          <div className="flex items-center justify-center gap-2">
-            <MapPin size={18} className="text-accent-orange" />
-            <div>
-              <div className="text-xs font-mono text-text-tertiary uppercase mb-1">
-                Workshop Location
+        {/* Main Arcade Ticket Contact Card */}
+        <div className="max-w-4xl mx-auto bg-[#FFFFFF] border-3 border-[#121212] shadow-brutal-lg p-6 sm:p-10 relative">
+          
+          {/* Top Bar */}
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b-3 border-[#121212] pb-6 mb-8">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-[#FACC15] border-2 border-[#121212] flex items-center justify-center shadow-brutal-xs">
+                <Terminal className="w-5 h-5 text-[#121212]" />
               </div>
-              <div className="text-sm font-semibold text-text-primary">
-                Bandung, West Java, Indonesia
+              <div>
+                <span className="font-mono text-xs font-bold text-[#6B7280] uppercase">
+                  DISPATCH CHANNEL: ACTIVE
+                </span>
+                <h3 className="text-xl sm:text-2xl font-black uppercase text-[#121212]">
+                  DIRECT COMMS TICKET
+                </h3>
+              </div>
+            </div>
+
+            <span className="bg-[#22C55E] text-[#121212] border-2 border-[#121212] font-mono text-xs font-black px-3 py-1 shadow-brutal-xs uppercase">
+              STATUS: OPEN FOR WORK
+            </span>
+          </div>
+
+          {/* Quick Email Copy Box */}
+          <div className="bg-[#FAF7EE] border-2 border-[#121212] p-4 sm:p-6 mb-8 shadow-brutal-xs">
+            <p className="font-mono text-xs text-[#6B7280] uppercase font-bold mb-2">
+              // DIRECT EMAIL ADDRESS:
+            </p>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+              <div className="flex items-center gap-2 font-mono text-sm sm:text-lg font-bold text-[#121212] bg-white border-2 border-[#121212] px-3.5 py-2 overflow-x-auto">
+                <Mail className="w-5 h-5 text-[#EA580C] shrink-0" />
+                <span className="select-all">{email}</span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={copyEmail}
+                  className="btn-brutal flex-1 sm:flex-none flex items-center justify-center gap-1.5 bg-[#FACC15] text-[#121212] border-2 border-[#121212] px-4 py-2.5 font-mono text-xs font-bold shadow-brutal-xs uppercase"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-4 h-4 text-[#16A34A]" />
+                      <span>COPIED!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-4 h-4" />
+                      <span>COPY EMAIL</span>
+                    </>
+                  )}
+                </button>
+
+                <a
+                  href={`mailto:${email}`}
+                  className="btn-brutal flex-1 sm:flex-none flex items-center justify-center gap-1.5 bg-[#121212] text-[#FAF7EE] border-2 border-[#121212] px-4 py-2.5 font-mono text-xs font-bold shadow-brutal-xs uppercase"
+                >
+                  <Send className="w-4 h-4" />
+                  <span>MAILTO</span>
+                </a>
               </div>
             </div>
           </div>
-        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="bg-surface-primary border border-border-subtle rounded p-8"
-        >
-          <h4 className="text-lg font-semibold text-text-primary mb-6">
-            Or submit a work order below
-          </h4>
+          {/* Social Platforms Grid */}
+          <div className="space-y-4">
+            <p className="font-mono text-xs text-[#6B7280] uppercase font-bold">
+              // CONNECT ON EXTERNAL NETWORKS:
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {socials.map((social) => {
+                const Icon = social.icon;
+                if (social.isDiscord) {
+                  return (
+                    <button
+                      key={social.name}
+                      onClick={copyDiscord}
+                      type="button"
+                      className={`btn-brutal text-left ${social.color} ${
+                        social.textWhite ? "text-white" : "text-[#121212]"
+                      } border-2 border-[#121212] p-4 shadow-brutal-xs flex flex-col justify-between group cursor-pointer`}
+                    >
+                      <div className="flex items-center justify-between mb-3">
+                        <Icon className="w-6 h-6" />
+                        <span className="font-mono text-[9px] font-black uppercase px-1.5 py-0.5 bg-black text-white">
+                          {discordCopied ? "✓ COPIED" : social.tag}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="font-mono text-sm font-extrabold uppercase flex items-center justify-between">
+                          <span>{social.name}</span>
+                          {discordCopied ? (
+                            <Check className="w-3.5 h-3.5 text-[#86EFAC]" />
+                          ) : (
+                            <Copy className="w-3.5 h-3.5 opacity-70 group-hover:opacity-100" />
+                          )}
+                        </span>
+                        <span className="block font-mono text-[10px] opacity-90 mt-0.5 font-bold">
+                          {discordCopied ? "COPIED TO CLIPBOARD!" : `${social.handle} (COPY)`}
+                        </span>
+                      </div>
+                    </button>
+                  );
+                }
 
-          {isSubmitted ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="p-4 bg-accent-green/10 border border-accent-green rounded text-accent-green text-center"
-            >
-              ✓ Work order received. I will review the project details and
-              respond as soon as possible.
-            </motion.div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="px-4 py-3 bg-surface-secondary border border-border-subtle rounded text-text-primary placeholder-text-tertiary focus:outline-none focus:border-accent-orange transition"
-                  required
-                />
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  className="px-4 py-3 bg-surface-secondary border border-border-subtle rounded text-text-primary placeholder-text-tertiary focus:outline-none focus:border-accent-orange transition"
-                  required
-                />
-              </div>
-
-              <input
-                type="text"
-                placeholder="Company or Organization"
-                className="w-full px-4 py-3 bg-surface-secondary border border-border-subtle rounded text-text-primary placeholder-text-tertiary focus:outline-none focus:border-accent-orange transition"
-              />
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <CustomSelect
-                  options={projectTypeOptions}
-                  value={projectType}
-                  onChange={setProjectType}
-                  placeholder="Select Project Type"
-                />
-                <CustomSelect
-                  options={timelineOptions}
-                  value={estimatedTimeline}
-                  onChange={setEstimatedTimeline}
-                  placeholder="Estimated Timeline"
-                />
-              </div>
-
-              <textarea
-                placeholder="Project Description"
-                rows={5}
-                className="w-full px-4 py-3 bg-surface-secondary border border-border-subtle rounded text-text-primary placeholder-text-tertiary focus:outline-none focus:border-accent-orange transition resize-none"
-                required
-              />
-
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full px-6 py-3 bg-accent-orange text-surface-primary font-semibold rounded hover:bg-accent-orange/90 transition"
-              >
-                Submit Work Order
-              </motion.button>
-            </form>
-          )}
-        </motion.div>
-
-        {/* Availability Status */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mt-8 text-center text-sm text-text-tertiary font-mono"
-        >
-          <div className="inline-flex items-center gap-2 bg-surface-primary px-4 py-2 rounded border border-border-subtle">
-            <div className="w-2 h-2 bg-accent-green rounded-full animate-pulse" />
-            WORKSHOP STATUS: OPERATIONAL & AVAILABLE FOR PROJECTS
+                return (
+                  <a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`btn-brutal ${social.color} ${
+                      social.textWhite ? "text-white" : "text-[#121212]"
+                    } border-2 border-[#121212] p-4 shadow-brutal-xs flex flex-col justify-between group`}
+                  >
+                    <div className="flex items-center justify-between mb-3">
+                      <Icon className="w-6 h-6" />
+                      <span className="font-mono text-[9px] font-black uppercase px-1.5 py-0.5 bg-black text-white">
+                        {social.tag}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="font-mono text-sm font-extrabold uppercase">
+                        {social.name}
+                      </span>
+                      <span className="block font-mono text-[10px] opacity-75 mt-0.5">
+                        {social.handle || "VISIT PROFILE →"}
+                      </span>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
           </div>
-        </motion.div>
+
+          {/* Download Resume Action */}
+          <div className="mt-8 pt-6 border-t-2 border-[#121212] flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="font-mono text-xs text-[#4B5563]">
+              Need an offline version of my credentials and project history?
+            </p>
+            <a
+              href={getAssetUrl("CVRizky.pdf")}
+              download
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-brutal inline-flex items-center gap-2 bg-[#EA580C] text-white border-2 border-[#121212] px-6 py-2.5 font-mono text-xs font-black shadow-brutal-xs uppercase"
+            >
+              <Download className="w-4 h-4" />
+              <span>DOWNLOAD RESUME / CV</span>
+            </a>
+          </div>
+
+        </div>
+
       </div>
     </section>
   );

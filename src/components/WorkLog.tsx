@@ -2,146 +2,119 @@
 
 import { motion } from "framer-motion";
 import { timeline } from "@/data/projects";
-import { Briefcase, Calendar, MapPin, Building2, CheckCircle2 } from "lucide-react";
+import { Briefcase, Calendar, MapPin, CheckCircle2, Trophy, Milestone } from "lucide-react";
 
 export default function WorkLog() {
   return (
-    <section className="py-20 bg-background relative">
+    <section id="journey" className="py-20 bg-[#FAF7EE] relative border-t-3 border-[#121212] bg-arcade-grid-dense">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mb-16 space-y-4 text-center md:text-left"
-        >
-          <div className="inline-block bg-accent-green/10 px-3 py-2 rounded border border-accent-green/30">
-            <h2 className="text-sm font-mono text-accent-green uppercase tracking-widest">
-              PROFESSIONAL WORK & INTERNSHIP LOG
-            </h2>
+        
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+          <div className="inline-flex items-center gap-2 bg-[#FACC15] text-[#121212] border-2 border-[#121212] px-3.5 py-1 font-mono text-xs font-bold uppercase shadow-brutal-xs">
+            <Milestone className="w-3.5 h-3.5" />
+            <span>EXP LOG // CAREER QUESTS</span>
           </div>
-          <h3 className="text-3xl md:text-4xl font-bold text-text-primary">
-            A chronological record of internships, web development engineering, and mentorships
-          </h3>
-        </motion.div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Timeline Vertical Line */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-border-subtle transform md:-translate-x-1/2" />
+          <h2 className="text-3xl sm:text-5xl font-extrabold uppercase text-[#121212] tracking-tight">
+            WORK LOG &amp; MILESTONES
+          </h2>
 
-          {/* Timeline Items */}
-          <div className="space-y-12">
-            {timeline.map((entry, index) => {
-              const isEven = index % 2 === 0;
-              return (
-                <motion.div
-                  key={`${entry.company}-${entry.period}`}
-                  initial={{ opacity: 0, x: isEven ? -20 : 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="relative flex flex-col md:flex-row items-center"
-                >
-                  {/* Timeline Dot Wrapper */}
-                  <div className="absolute left-4 md:left-1/2 top-8 -translate-x-1/2 z-10">
-                    <motion.div
-                      animate={{
-                        scale: [1, 1.15, 1],
-                        boxShadow: [
-                          "0 0 0 0 rgba(245, 158, 11, 0.5)",
-                          "0 0 0 5px rgba(245, 158, 11, 0)",
-                        ],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: index * 0.2,
-                      }}
-                      className="w-5 h-5 rounded-full bg-surface-primary border-2 border-accent-orange flex items-center justify-center"
-                    >
-                      <div className="w-2 h-2 rounded-full bg-accent-orange" />
-                    </motion.div>
-                  </div>
-
-                  {/* Horizontal Connector Line (Desktop) */}
-                  <div
-                    className={`hidden md:block absolute top-10 transform -translate-y-1/2 h-0.5 bg-border-subtle ${
-                      isEven ? "right-1/2 w-10" : "left-1/2 w-10"
-                    }`}
-                  />
-
-                  {/* Content Card Wrapper */}
-                  <div
-                    className={`w-full pl-12 md:pl-0 ${
-                      isEven
-                        ? "md:w-[calc(50%-2.5rem)] md:mr-auto"
-                        : "md:w-[calc(50%-2.5rem)] md:ml-auto"
-                    }`}
-                  >
-                    <div className="bg-surface-secondary border border-border-subtle rounded-lg p-6 hover:border-accent-orange/50 transition shadow-xl space-y-4">
-                      {/* Header info */}
-                      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border-subtle pb-3">
-                        <div className="flex items-center gap-2">
-                          <Building2 size={18} className="text-accent-orange" />
-                          <span className="font-bold text-text-primary text-base md:text-lg">
-                            {entry.company}
-                          </span>
-                        </div>
-                        <span className="inline-block px-2.5 py-1 bg-accent-orange/10 text-accent-orange text-xs font-mono font-semibold rounded border border-accent-orange/20">
-                          {entry.type}
-                        </span>
-                      </div>
-
-                      {/* Role & Period */}
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2 text-accent-cyan font-semibold text-base">
-                          <Briefcase size={16} />
-                          <span>{entry.role}</span>
-                        </div>
-                        <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-text-tertiary">
-                          <div className="flex items-center gap-1">
-                            <Calendar size={14} />
-                            <span>{entry.period}</span>
-                          </div>
-                          {entry.location && (
-                            <div className="flex items-center gap-1">
-                              <MapPin size={14} />
-                              <span>{entry.location}</span>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Bullet points */}
-                      <ul className="space-y-2 text-text-secondary text-sm leading-relaxed pt-1">
-                        {entry.points.map((point, i) => (
-                          <li key={i} className="flex items-start gap-2">
-                            <CheckCircle2 size={15} className="text-accent-green shrink-0 mt-0.5" />
-                            <span>{point}</span>
-                          </li>
-                        ))}
-                      </ul>
-
-                      {/* Technologies */}
-                      <div className="pt-2 flex flex-wrap gap-1.5 border-t border-border-subtle/50">
-                        {entry.technologies.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-2.5 py-1 bg-surface-primary border border-border-subtle text-text-tertiary text-xs rounded font-mono"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
+          <p className="font-mono text-sm sm:text-base text-[#4B5563]">
+            Verified experience across game developer mentorship, web engineering internships, and academic programs.
+          </p>
         </div>
+
+        {/* Timeline Stack */}
+        <div className="space-y-8 max-w-4xl mx-auto">
+          {timeline.map((entry, index) => (
+            <motion.div
+              key={entry.company + entry.period}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="bg-[#FFFFFF] border-3 border-[#121212] shadow-brutal-md p-6 sm:p-8 relative"
+            >
+              {/* Header Bar */}
+              <div className="flex flex-wrap items-start justify-between gap-4 border-b-2 border-[#121212] pb-4 mb-5">
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span
+                      className={`font-mono text-[10px] font-black uppercase px-2.5 py-0.5 border border-black ${
+                        entry.type === "Mentorship"
+                          ? "bg-[#FACC15] text-[#121212]"
+                          : entry.type === "Internship"
+                          ? "bg-[#06B6D4] text-[#121212]"
+                          : "bg-[#22C55E] text-[#121212]"
+                      }`}
+                    >
+                      {entry.type}
+                    </span>
+                    <span className="font-mono text-xs text-[#6B7280]">
+                      CHECKPOINT 0{index + 1}
+                    </span>
+                  </div>
+                  <h3 className="text-2xl font-black uppercase text-[#121212] tracking-tight">
+                    {entry.role}
+                  </h3>
+                  <div className="flex flex-wrap items-center gap-3 font-mono text-xs text-[#4B5563] mt-1">
+                    <span className="font-bold text-[#121212]">{entry.company}</span>
+                    {entry.location && (
+                      <span className="flex items-center gap-1">
+                        <MapPin className="w-3 h-3 text-[#EA580C]" />
+                        <span>{entry.location}</span>
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Period Badge */}
+                <div className="bg-[#121212] text-[#FACC15] font-mono text-xs font-bold px-3 py-1.5 border-2 border-black shadow-brutal-xs flex items-center gap-1.5">
+                  <Calendar className="w-3.5 h-3.5" />
+                  <span>{entry.period}</span>
+                </div>
+              </div>
+
+              {/* Summary Description */}
+              <p className="font-mono text-sm text-[#121212] mb-5 leading-relaxed font-medium">
+                {entry.summary}
+              </p>
+
+              {/* Key Bullet Points */}
+              <div className="space-y-2 mb-6">
+                {entry.points.map((point, pIdx) => (
+                  <div key={pIdx} className="flex items-start gap-2.5">
+                    <span className="w-4 h-4 bg-[#FACC15] text-[#121212] border border-black flex items-center justify-center font-mono text-[10px] font-black shrink-0 mt-0.5">
+                      ✓
+                    </span>
+                    <span className="font-mono text-xs text-[#4B5563] leading-normal">
+                      {point}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Technologies Applied */}
+              <div className="flex flex-wrap gap-1.5 pt-4 border-t border-[#E5E7EB]">
+                {entry.technologies.map((tech) => (
+                  <span
+                    key={tech}
+                    className="bg-[#FAF7EE] border border-[#121212] font-mono text-[11px] font-bold px-2 py-0.5 text-[#121212]"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              {/* Corner Stamp */}
+              <div className="absolute top-2 right-2 opacity-5 pointer-events-none font-mono text-6xl font-black text-black select-none">
+                0{index + 1}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
       </div>
     </section>
   );

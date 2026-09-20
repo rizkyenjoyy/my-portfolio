@@ -2,8 +2,6 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
-
 * {
   margin: 0;
   padding: 0;
@@ -15,45 +13,83 @@ html {
 }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
-  background-color: rgb(11, 15, 20);
-  color: rgb(229, 231, 235);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  background-color: #FAF7EE;
+  color: #121212;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Neubrutalism Dot / Grid Background Pattern */
+.bg-arcade-grid {
+  background-image: radial-gradient(#121212 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.bg-arcade-grid-dense {
+  background-image: radial-gradient(#121212 1.2px, transparent 1.2px);
+  background-size: 16px 16px;
+}
+
+.bg-blueprint-grid {
+  background-image: 
+    linear-gradient(to right, rgba(18, 18, 18, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(18, 18, 18, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Brutal Tactile Button Utilities */
+.btn-brutal {
+  transition: all 0.15s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.btn-brutal:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #121212 !important;
+}
+
+.btn-brutal:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #121212 !important;
+}
+
+.card-brutal-hover {
+  transition: all 0.18s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.card-brutal-hover:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 8px 8px 0px #121212 !important;
+}
+
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgb(17, 24, 32);
+  background: #F3ECE1;
+  border-left: 2px solid #121212;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(245, 158, 11);
-  border-radius: 6px;
+  background: #FACC15;
+  border: 2px solid #121212;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(255, 174, 51);
-}
-
-/* Firefox */
-* {
-  scrollbar-color: rgb(245, 158, 11) rgb(17, 24, 32);
-  scrollbar-width: thin;
+  background: #EA580C;
 }
 
 /* Selection */
 ::selection {
-  background-color: rgb(245, 158, 11);
-  color: rgb(11, 15, 20);
+  background-color: #FACC15;
+  color: #121212;
 }
 
 ::-moz-selection {
-  background-color: rgb(245, 158, 11);
-  color: rgb(11, 15, 20);
+  background-color: #FACC15;
+  color: #121212;
 }
+
