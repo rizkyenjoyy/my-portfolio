@@ -90,64 +90,64 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-[#FAF7EE] relative border-t-3 border-[#121212] bg-arcade-grid">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-12 sm:py-20 bg-[#FAF7EE] relative border-t-2 sm:border-t-3 border-[#121212] bg-arcade-grid">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 bg-[#FACC15] text-[#121212] border-2 border-[#121212] px-3.5 py-1 font-mono text-xs font-bold uppercase shadow-brutal-xs">
+        <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4 mb-10 sm:mb-16">
+          <div className="inline-flex items-center gap-2 bg-[#FACC15] text-[#121212] border-2 border-[#121212] px-3 sm:px-3.5 py-1 font-mono text-[10px] sm:text-xs font-bold uppercase shadow-brutal-xs">
             <Mail className="w-3.5 h-3.5" />
             <span>COMMUNICATION CHANNEL // CONNECT</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold uppercase text-[#121212] tracking-tight">
+          <h2 className="text-fluid-h2 font-extrabold uppercase text-[#121212] tracking-tight">
             LET'S WORK TOGETHER // GET IN TOUCH
           </h2>
 
-          <p className="font-mono text-sm sm:text-base text-[#4B5563]">
+          <p className="font-mono text-xs sm:text-sm md:text-base text-[#4B5563] px-2">
             Have a game development idea, a web system to build, or an exciting career opportunity? Let's connect!
           </p>
         </div>
 
         {/* Main Arcade Ticket Contact Card */}
-        <div className="max-w-4xl mx-auto bg-[#FFFFFF] border-3 border-[#121212] shadow-brutal-lg p-6 sm:p-10 relative">
+        <div className="max-w-4xl mx-auto bg-[#FFFFFF] border-2 sm:border-3 border-[#121212] shadow-brutal-sm sm:shadow-brutal-lg p-4 xs:p-6 sm:p-10 relative">
           
           {/* Top Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-4 border-b-3 border-[#121212] pb-6 mb-8">
+          <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-3 sm:gap-4 border-b-2 sm:border-b-3 border-[#121212] pb-4 sm:pb-6 mb-6 sm:mb-8">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-[#FACC15] border-2 border-[#121212] flex items-center justify-center shadow-brutal-xs">
-                <Terminal className="w-5 h-5 text-[#121212]" />
+              <div className="w-9 h-9 sm:w-10 sm:h-10 bg-[#FACC15] border-2 border-[#121212] flex items-center justify-center shadow-brutal-xs shrink-0">
+                <Terminal className="w-4 h-4 sm:w-5 sm:h-5 text-[#121212]" />
               </div>
               <div>
-                <span className="font-mono text-xs font-bold text-[#6B7280] uppercase">
+                <span className="font-mono text-[10px] sm:text-xs font-bold text-[#6B7280] uppercase">
                   DISPATCH CHANNEL: ACTIVE
                 </span>
-                <h3 className="text-xl sm:text-2xl font-black uppercase text-[#121212]">
+                <h3 className="text-lg sm:text-2xl font-black uppercase text-[#121212]">
                   DIRECT COMMS TICKET
                 </h3>
               </div>
             </div>
 
-            <span className="bg-[#22C55E] text-[#121212] border-2 border-[#121212] font-mono text-xs font-black px-3 py-1 shadow-brutal-xs uppercase">
+            <span className="bg-[#22C55E] text-[#121212] border-2 border-[#121212] font-mono text-[10px] sm:text-xs font-black px-2.5 sm:px-3 py-1 shadow-brutal-xs uppercase self-start xs:self-auto">
               STATUS: OPEN FOR WORK
             </span>
           </div>
 
           {/* Quick Email Copy Box */}
-          <div className="bg-[#FAF7EE] border-2 border-[#121212] p-4 sm:p-6 mb-8 shadow-brutal-xs">
-            <p className="font-mono text-xs text-[#6B7280] uppercase font-bold mb-2">
+          <div className="bg-[#FAF7EE] border-2 border-[#121212] p-3.5 sm:p-6 mb-6 sm:mb-8 shadow-brutal-xs">
+            <p className="font-mono text-[11px] sm:text-xs text-[#6B7280] uppercase font-bold mb-2">
               // DIRECT EMAIL ADDRESS:
             </p>
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-              <div className="flex items-center gap-2 font-mono text-sm sm:text-lg font-bold text-[#121212] bg-white border-2 border-[#121212] px-3.5 py-2 overflow-x-auto">
-                <Mail className="w-5 h-5 text-[#EA580C] shrink-0" />
-                <span className="select-all">{email}</span>
+              <div className="flex items-center gap-2 font-mono text-xs xs:text-sm sm:text-base font-bold text-[#121212] bg-white border-2 border-[#121212] px-3 py-2 overflow-hidden">
+                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-[#EA580C] shrink-0" />
+                <span className="select-all break-all">{email}</span>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex flex-col xs:flex-row items-stretch gap-2 shrink-0">
                 <button
                   onClick={copyEmail}
-                  className="btn-brutal flex-1 sm:flex-none flex items-center justify-center gap-1.5 bg-[#FACC15] text-[#121212] border-2 border-[#121212] px-4 py-2.5 font-mono text-xs font-bold shadow-brutal-xs uppercase"
+                  className="btn-brutal min-h-[44px] flex items-center justify-center gap-1.5 bg-[#FACC15] text-[#121212] border-2 border-[#121212] px-4 py-2.5 font-mono text-xs font-bold shadow-brutal-xs uppercase cursor-pointer"
                 >
                   {copied ? (
                     <>
@@ -164,7 +164,7 @@ export default function Contact() {
 
                 <a
                   href={`mailto:${email}`}
-                  className="btn-brutal flex-1 sm:flex-none flex items-center justify-center gap-1.5 bg-[#121212] text-[#FAF7EE] border-2 border-[#121212] px-4 py-2.5 font-mono text-xs font-bold shadow-brutal-xs uppercase"
+                  className="btn-brutal min-h-[44px] flex items-center justify-center gap-1.5 bg-[#121212] text-[#FAF7EE] border-2 border-[#121212] px-4 py-2.5 font-mono text-xs font-bold shadow-brutal-xs uppercase"
                 >
                   <Send className="w-4 h-4" />
                   <span>MAILTO</span>
@@ -174,11 +174,11 @@ export default function Contact() {
           </div>
 
           {/* Social Platforms Grid */}
-          <div className="space-y-4">
-            <p className="font-mono text-xs text-[#6B7280] uppercase font-bold">
+          <div className="space-y-3 sm:space-y-4">
+            <p className="font-mono text-[11px] sm:text-xs text-[#6B7280] uppercase font-bold">
               // CONNECT ON EXTERNAL NETWORKS:
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
               {socials.map((social) => {
                 const Icon = social.icon;
                 if (social.isDiscord) {
@@ -187,18 +187,18 @@ export default function Contact() {
                       key={social.name}
                       onClick={copyDiscord}
                       type="button"
-                      className={`btn-brutal text-left ${social.color} ${
+                      className={`btn-brutal min-h-[44px] text-left ${social.color} ${
                         social.textWhite ? "text-white" : "text-[#121212]"
-                      } border-2 border-[#121212] p-4 shadow-brutal-xs flex flex-col justify-between group cursor-pointer`}
+                      } border-2 border-[#121212] p-3.5 sm:p-4 shadow-brutal-xs flex flex-col justify-between group cursor-pointer`}
                     >
-                      <div className="flex items-center justify-between mb-3">
-                        <Icon className="w-6 h-6" />
-                        <span className="font-mono text-[9px] font-black uppercase px-1.5 py-0.5 bg-black text-white">
+                      <div className="flex items-center justify-between mb-2 sm:mb-3">
+                        <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
+                        <span className="font-mono text-[8px] sm:text-[9px] font-black uppercase px-1.5 py-0.5 bg-black text-white">
                           {discordCopied ? "✓ COPIED" : social.tag}
                         </span>
                       </div>
                       <div>
-                        <span className="font-mono text-sm font-extrabold uppercase flex items-center justify-between">
+                        <span className="font-mono text-xs sm:text-sm font-extrabold uppercase flex items-center justify-between">
                           <span>{social.name}</span>
                           {discordCopied ? (
                             <Check className="w-3.5 h-3.5 text-[#86EFAC]" />
@@ -206,7 +206,7 @@ export default function Contact() {
                             <Copy className="w-3.5 h-3.5 opacity-70 group-hover:opacity-100" />
                           )}
                         </span>
-                        <span className="block font-mono text-[10px] opacity-90 mt-0.5 font-bold">
+                        <span className="block font-mono text-[9px] sm:text-[10px] opacity-90 mt-0.5 font-bold">
                           {discordCopied ? "COPIED TO CLIPBOARD!" : `${social.handle} (COPY)`}
                         </span>
                       </div>
@@ -220,21 +220,21 @@ export default function Contact() {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`btn-brutal ${social.color} ${
+                    className={`btn-brutal min-h-[44px] ${social.color} ${
                       social.textWhite ? "text-white" : "text-[#121212]"
-                    } border-2 border-[#121212] p-4 shadow-brutal-xs flex flex-col justify-between group`}
+                    } border-2 border-[#121212] p-3.5 sm:p-4 shadow-brutal-xs flex flex-col justify-between group`}
                   >
-                    <div className="flex items-center justify-between mb-3">
-                      <Icon className="w-6 h-6" />
-                      <span className="font-mono text-[9px] font-black uppercase px-1.5 py-0.5 bg-black text-white">
+                    <div className="flex items-center justify-between mb-2 sm:mb-3">
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
+                      <span className="font-mono text-[8px] sm:text-[9px] font-black uppercase px-1.5 py-0.5 bg-black text-white">
                         {social.tag}
                       </span>
                     </div>
                     <div>
-                      <span className="font-mono text-sm font-extrabold uppercase">
+                      <span className="font-mono text-xs sm:text-sm font-extrabold uppercase">
                         {social.name}
                       </span>
-                      <span className="block font-mono text-[10px] opacity-75 mt-0.5">
+                      <span className="block font-mono text-[9px] sm:text-[10px] opacity-75 mt-0.5">
                         {social.handle || "VISIT PROFILE →"}
                       </span>
                     </div>
@@ -245,8 +245,8 @@ export default function Contact() {
           </div>
 
           {/* Download Resume Action */}
-          <div className="mt-8 pt-6 border-t-2 border-[#121212] flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="font-mono text-xs text-[#4B5563]">
+          <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t-2 border-[#121212] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
+            <p className="font-mono text-[11px] sm:text-xs text-[#4B5563]">
               Need an offline version of my credentials and project history?
             </p>
             <a
@@ -254,7 +254,7 @@ export default function Contact() {
               download
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-brutal inline-flex items-center gap-2 bg-[#EA580C] text-white border-2 border-[#121212] px-6 py-2.5 font-mono text-xs font-black shadow-brutal-xs uppercase"
+              className="btn-brutal min-h-[44px] inline-flex items-center justify-center gap-2 bg-[#EA580C] text-white border-2 border-[#121212] px-5 sm:px-6 py-2.5 font-mono text-xs font-black shadow-brutal-xs uppercase"
             >
               <Download className="w-4 h-4" />
               <span>DOWNLOAD RESUME / CV</span>
