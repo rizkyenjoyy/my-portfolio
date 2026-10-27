@@ -655,108 +655,227 @@ export const projects: ProjectCase[] = [
   {
     id: "010",
     caseNumber: "WEB-001",
-    title: "Web-Based E-Recruitment System",
-    slug: "e-recruitment-system",
+    title: "Homestay App & Tourism Ecosystem (KUY Pangandaran)",
+    slug: "kuy-pangandaran",
     year: "2025",
-    status: "Completed",
+    status: "Live Production",
     category: "web",
-    classification: "Enterprise Web Application",
-    thumbnail: "",
+    classification: "Enterprise Tourism & Accommodation Marketplace",
+    thumbnail: "/Thumbnail/kuypangandaran.png",
+    liveUrl: "https://kuypangandaran.com/",
     summary:
-      "Engineered a full-featured e-recruitment platform to manage job vacancies, candidate submissions, screening pipelines, and recruitment analytics with automated rule-based filtering.",
+      "A production-ready multi-role accommodation reservation and local tourism ecosystem (KUY Pangandaran) built with Laravel 12 and MySQL. Unifies homestay bookings, tourism ticketing, local MSME souvenirs, and daily bidding advertising. Engineered with cryptographic Dual-Handshake OTP check-ins, event-driven calendar occupancy blocking, real-time Haversine geolocation discovery, and tiered host quota monetization.",
     problem:
-      "Traditional manual recruitment workflows resulted in fragmented candidate submissions, slow initial screening turnaround times, and inconsistent scoring standards.",
+      "Local homestay hosts struggled with manual double-booking conflicts, fraudulent cancellation disputes, lack of verified physical guest arrival checks, and chaotic commission management. Tourists simultaneously faced difficulty locating nearby accommodations without precise subdistrict knowledge.",
     solution:
-      "Designed and deployed a responsive Laravel & React web application providing role-based portals for HR recruiters and applicants, automated qualification scoring, and real-time status tracking.",
-    role: "Full-Stack Developer & System Analyst",
-    duration: "12 weeks",
+      "Architected a robust multi-role Laravel 12 platform featuring an event-driven Calendar Occupancy Blocker (with 10-minute hold expiry), a Dual-Handshake OTP check-in engine for fraud-proof escrow payout settlements, a Haversine spherical distance geolocation API, a schema-driven dynamic Admin Resource CRUD engine covering 18+ entities, and a daily bidding property placement system.",
+    role: "Fullstack Web Engineer & System Architect",
+    duration: "Production-Ready (2025)",
     technologies: [
-      "Laravel",
-      "PHP",
-      "React",
+      "Laravel 12",
+      "PHP 8.2+",
       "MySQL",
+      "Spatie RBAC",
       "Tailwind CSS",
+      "Blade",
+      "Haversine Geolocation",
+      "Barryvdh DomPDF",
+      "Filament Excel",
       "REST APIs",
     ],
     features: [
-      "Applicant registration, identity verification, and profile management",
-      "Job posting lifecycle management and dynamic application forms",
-      "Rule-based candidate auto-screening engine",
-      "Multi-stage recruitment workflow and assessment scoring",
-      "Role-based dashboards for HR managers and recruiters (RBAC)",
-      "Comprehensive reporting and candidate ranking analytics",
+      "Dual-Handshake OTP Check-In Engine: Cryptographic UUID token & 6-digit OTP verification locking partner payout settlements upon verified physical arrival",
+      "Automated Calendar Occupancy Blocker: Eloquent lifecycle observers generating atomic blocked dates with 10-minute hold expiry to eliminate double-booking",
+      "Haversine Spherical Distance Geolocation: Great-circle distance calculations connecting user GPS coordinates directly to closest homestays and attractions",
+      "Daily Bidding Property Placement Engine: Real-time SQL auction algorithm ranking properties on hero carousels based on daily sponsor bids",
+      "Declarative Dynamic Admin Resource CRUD: Schema-driven architecture managing 18+ master entities without boilerplate controller code",
+      "Tiered Host Quotas & Add-On Monetization: Free tier vs. Mitra Pro subscriptions (5 homestays, 5% fee discount) and permanent listing slot purchases",
+      "Dual-Layer Moderation & Audit Staging: Pending edits stored as JSON staging records to prevent unvetted facility or price alterations",
+      "Multi-Tier Commission & Affiliate Tracking: 4-layer commission hierarchy with referral attribution via secure cookies",
+      "Guest Checkout & Cryptographic Token Tracking: Public reservation inquiry via UUID tokens, rate limiting, and automated DomPDF invoice generation",
     ],
     challenges: [
       {
-        issue: "Inconsistent applicant data schemas across various positions",
+        issue: "Simultaneous double-booking race conditions and orphaned blocked calendar dates",
         diagnosis:
-          "Lack of strict data standardization made automated candidate screening brittle",
+          "Concurrent checkout sessions could lock overlapping dates or abandon uncompleted bookings permanently in the database",
         repair:
-          "Implemented strict JSON schema validations and unified profile data structures",
+          "Implemented Eloquent model lifecycle hooks (creating/saving) on OrderHomestay combined with a 10-minute atomic hold-expiry window that sweeps unconfirmed blocked dates",
         result:
-          "Automated applicant screening achieved 100% processing consistency",
+          "100% elimination of double-booking race conditions while maintaining accurate real-time room availability",
       },
       {
-        issue: "Database performance bottlenecks during peak application surges",
+        issue: "Host-guest arrival disputes and unverified escrow settlement claims",
         diagnosis:
-          "Unindexed complex relational queries when generating ranking reports",
+          "Traditional platforms rely on honor-system check-in timestamps, leading to false cancellation chargebacks and partner fraud",
         repair:
-          "Added composite database indexes, optimized SQL query plans, and introduced server-side pagination",
+          "Built a cryptographic Dual-Handshake OTP mechanism where a unique 6-digit check-in token must be validated by the host dashboard on-site before payout rights unlock",
         result:
-          "Query response times decreased by 80%, smoothly supporting 10,000+ applicant records",
+          "Guaranteed fraud-proof escrow settlements based strictly on verified physical guest presence",
+      },
+      {
+        issue: "Boilerplate controller bloat managing 18+ admin master data entities",
+        diagnosis:
+          "Writing separate controllers for FAQs, articles, vouchers, bank accounts, and moderation logs caused massive code duplication and maintenance friction",
+        repair:
+          "Architected a centralized schema-driven AdminResourceController handling dynamic validation, eager-loaded relationships, search filters, and PDF/Excel exports",
+        result:
+          "Reduced administrative backend codebase by over 70% while providing consistent, auditable CRUD operations",
       },
     ],
   },
   {
     id: "011",
     caseNumber: "WEB-002",
-    title: "Financial Record System for Pilgrimage Services",
-    slug: "financial-record-system",
-    year: "2024",
-    status: "Completed",
+    title: "HireScan: Smart E-Recruitment & ATS Platform",
+    slug: "e-recruitment-system",
+    year: "2025",
+    status: "Production-Ready",
     category: "web",
-    classification: "Financial & ERP System",
-    thumbnail: "",
+    classification: "Smart ATS & Multi-Branch E-Recruitment Platform",
+    thumbnail: "/Thumbnail/hirescan.png",
+    githubUrl: "https://github.com/rizkyenjoyy/hirescan",
     summary:
-      "Developed a centralized financial ledger and payment accounting platform for PT. Alyusro Bandung, automating pilgrim payment tracking and multi-tier agent commission settlements.",
+      "An enterprise-grade Applicant Tracking System (ATS) and automated e-recruitment platform (HireScan) engineered for high-volume, multi-branch talent acquisition (e.g. MyRepublic partnerships). Built with Laravel, React 19, TypeScript, Inertia.js v2, and Tailwind CSS. Features a zero-migration dynamic form builder, a deterministic rule-based auto-screening engine executing in 0 milliseconds, a calendar-aware smart interview scheduler skipping national holidays and weekends, and 1-click Bundy Grouping candidate forwarding with email failover.",
     problem:
-      "Manual ledger accounting and disconnected spreadsheets caused reconciliations delays, untracked payment installments, and frequent commission calculation errors.",
+      "Multi-branch enterprise recruitment suffered severe operational bottlenecks: manual resume screening took 3–5 working days per batch and was prone to human error; introducing role-specific questions required rigid database migrations or detached Google Forms; manual interview invitations frequently conflicted with national holidays or weekends; and forwarding qualified candidates to branch PICs via fragmented chat attachments caused lost records and zero status visibility.",
     solution:
-      "Engineered a secure Laravel financial system featuring automated multi-tier commission engines, payment reconciliation, and structured ledger reporting with audit trails.",
-    role: "Web Developer Intern",
-    duration: "3 months (Jul 2024 – Sep 2024)",
-    technologies: ["Laravel", "PHP", "MySQL", "Tailwind CSS", "JavaScript"],
+      "Architected a modern monolith using Laravel and React 19 via Inertia.js. Developed a schema-less JSONB dynamic form builder supporting 5 input types and screening toggles, a forward-chaining deterministic inference engine evaluating applicants instantly with transparent audit trails, a holiday-aware scheduling algorithm skipping Indonesian national holidays and weekends, and a Bundy Grouping in-memory batch forwarder with automatic HRD central failover.",
+    role: "Full-Stack Web Engineer & System Architect",
+    duration: "12 weeks (2025)",
+    technologies: [
+      "Laravel 12/13",
+      "PHP 8.2+",
+      "React 19",
+      "TypeScript",
+      "Inertia.js v2",
+      "Tailwind CSS v4",
+      "MySQL / PostgreSQL (JSONB)",
+      "Radix UI",
+      "Vite 8",
+      "REST APIs",
+    ],
     features: [
-      "Role-based access control (Admin, Finance Officer, Agent)",
-      "Pilgrim client profiles and package quota management",
-      "Installment payment logging with receipt generation",
-      "Automated multi-tier agent commission calculation engine",
-      "Real-time cash flow overview and exportable ledger sheets",
-      "Full audit trail logging for all financial modifications",
+      "Zero-Migration Dynamic Form Builder: Schema-less JSONB architecture enabling HRD/RO to deploy customizable screening questionnaires across 5 input types without database migrations",
+      "Deterministic Rule-Based Auto-Screening Engine: Mathematical forward-chaining inference engine evaluating candidate qualifications in 0ms with auditable pass/fail reasoning",
+      "Smart Interview Scheduler (Calendar-Aware): Intelligent date calculation algorithm detecting weekends and automatically skipping Indonesian National Public Holidays (Tanggal Merah)",
+      "Bundy Grouping Batch Candidate Forwarding: In-memory aggregation ({vacancy_form_id}-{branch_city}) generating 1-click candidate digest emails for branch PICs",
+      "Email Failover & Delivery Protection: Automated routing mechanism redirecting candidate digests to central HRD if branch PIC emails are missing or invalid",
+      "Anti-Duplicate & Fraud Prevention: Restricts duplicate applications per vacancy based on WhatsApp & Email with configurable resubmit toggle",
+      "Multi-Role RBAC & Referral Tracking: Dedicated portals for HRD Managers and Recruitment Officers with unique referral link attribution (/apply/{formId}?ref={username})",
+      "Multi-Step Dynamic Applicant Portal: Responsive, accessible public application interface dynamically rendered from vacancy JSON schemas",
     ],
     challenges: [
       {
-        issue: "Complex commission tiering logic prone to human calculation errors",
+        issue: "Manual screening turnaround created a 3–5 day bottleneck for high-volume applicant surges",
         diagnosis:
-          "Varying seasonal package packages and agent ranks required distinct calculation rules",
+          "Human recruiters manually parsing basic hard-requirements (age ranges, driver's licenses, education, vehicle ownership) caused delays and inconsistent scoring",
         repair:
-          "Built a modular commission calculation strategy pattern supporting dynamic package tiers",
+          "Engineered a forward-chaining deterministic rule-based inference engine that executes sequentially on form submission, comparing applicant answers against expectation keys with 100% auditability",
         result:
-          "Eliminated commission calculation discrepancies and ensured 100% auditability",
+          "Reduced initial screening evaluation latency from 3–5 days to 0 seconds (instantaneous) with zero AI hallucination risk",
       },
       {
-        issue: "Absence of reliable transaction audit history",
+        issue: "Rigid database schema prevented fast creation of position-specific screening questionnaires",
         diagnosis:
-          "Legacy spreadsheets lacked timestamps, actor identities, and modification records",
+          "Traditional relational columns or Entity-Attribute-Value (EAV) models required expensive migrations or complex multi-table SQL joins that degraded performance",
         repair:
-          "Implemented immutable audit event logging across all financial ledger mutations",
+          "Implemented a schema-less JSONB architecture utilizing Eloquent JSON Attribute Casting on the screening_rules column of vacancy_forms with dual-mode isScreening toggles",
         result:
-          "Delivered complete operational visibility and effortless audit compliance",
+          "Enabled HRD to launch fully customized position questionnaires in < 5 minutes without touching database schemas or writing migration scripts",
+      },
+      {
+        issue: "Candidate interview invitations frequently conflicted with national holidays or weekends",
+        diagnosis:
+          "Static date offset math (+2 days) scheduled physical branch interviews on closed office days (Saturdays, Sundays, or Tanggal Merah)",
+        repair:
+          "Built a calendar-aware iterative scheduling algorithm cross-referencing Indonesian national public holiday calendars and weekend flags before generating personalized invitation templates",
+        result:
+          "Achieved 0% scheduling collision incidents and completely eliminated manual date corrections for recruitment officers",
+      },
+      {
+        issue: "Fragmented, unverified candidate distribution to regional branch managers",
+        diagnosis:
+          "Forwarding applicant data manually via chat attachments or spreadsheets caused lost applicant histories and zero status transparency",
+        repair:
+          "Created the Bundy Grouping batch candidate forwarder that aggregates qualified candidates in-memory by vacancy and branch, sending digest emails with automatic fallback to central HRD",
+        result:
+          "Boosted regional branch communication efficiency by 85% with 100% delivery reliability",
       },
     ],
   },
   {
     id: "012",
+    caseNumber: "WEB-003",
+    title: "Arbain: Pilgrimage Management & Financial Accounting ERP",
+    slug: "financial-record-system",
+    year: "2024",
+    status: "Completed",
+    category: "web",
+    classification: "Pilgrimage Operations & Financial Accounting ERP",
+    thumbnail: "/Thumbnail/arbain.png",
+    summary:
+      "A centralized web-based ERP and financial accounting platform (Arbain Travel) engineered for Umrah & Hajj pilgrimage travel agencies. Connects agency management (Super Admin) with marketing partners (Mitra Agen) in a unified system. Features two-tier registration and passport document verification, an automated payment approval and ledger reconciliation workflow, an early-warning deadline tracking engine ('Kejar Lunas' at H-60 departure), automated agent commission settlements upon complete payment, interactive Chart.js financial analytics, and in-app real-time notifications.",
+    problem:
+      "Umrah and Hajj travel agencies faced severe operational inefficiencies: manual spreadsheets caused payment reconciliation delays, untracked installment payments, and unverified bank transfers; passport and national ID validation lacked audit trails; missing early warnings for package payment deadlines (H-60 departure) led to seat quota losses; and calculating seasonal partner agent commissions manually resulted in frequent disbursement disputes.",
+    solution:
+      "Architected an integrated Laravel MVC platform featuring strict role-based access control (Admin vs. Agen) powered by Spatie Permission. Implemented a dual-step pilgrim registration and verification engine, an automated payment approval system that updates remaining balances dynamically upon bank proof validation, a model-level dynamic accessor engine for quota and deadline tracking ('Kejar Lunas' H-60), an automated commission distribution trigger upon full payment, interactive Chart.js revenue dashboards, and five automated database notification classes.",
+    role: "Web Developer Intern & System Architect",
+    duration: "3 months (Jul 2024 – Sep 2024)",
+    technologies: [
+      "Laravel (PHP 8.x)",
+      "MySQL",
+      "Spatie Permission (RBAC)",
+      "Bootstrap 5",
+      "Blade",
+      "Chart.js 3",
+      "Yajra DataTables",
+      "Laravel Excel",
+      "DomPDF",
+      "In-App Notifications",
+    ],
+    features: [
+      "Two-Tier Pilgrim Registration & Document Validation: Agent submission workflow with administrative passport, NIK, and medical history approval queues",
+      "Automated Payment Reconciliation & Invoice Engine: Bank transfer proof upload, admin audit workflow, dynamic remaining balance calculation, and official printable PDF invoices",
+      "Early-Warning Kejar Lunas & Quota Monitor: Dynamic Eloquent query scopes flagging unpaid pilgrims 60 days before departure (H-60) alongside real-time seat quota countdowns",
+      "Automated Partner Commission Engine: Trigger-based commission ledger generating disbursement records for marketing agents immediately when pilgrim balances reach full settlement",
+      "Interactive Financial Analytics Dashboard: Real-time Chart.js visualizer with interactive metrics switcher (Revenue in IDR vs. Transaction Frequency) and payment method ratios (Bank Transfer vs. Cash)",
+      "Multi-Role Access Control (Spatie RBAC): Granular permissions separating Administrator master data management from Agent registration & personal commission monitoring",
+      "Server-Side DataTables & Export Pipelines: High-speed Yajra DataTables indexing with one-click Excel, CSV, and PDF report downloads for financial accounting",
+      "Automated Event-Driven Notifications: 5 background database notification classes keeping agents and administrators in sync on approvals, payments, and payouts",
+    ],
+    challenges: [
+      {
+        issue: "Complex installment tracking and frequent reconciliation errors across seasonal pilgrimage packages",
+        diagnosis:
+          "Pilgrims pay varying deposit installments across different package tiers, making manual spreadsheet math prone to calculation errors and untracked deficits",
+        repair:
+          "Built dynamic Eloquent model accessors (tagihan_status, sisa_pembayaran) on the Jamaah model that recalculate balances automatically only upon approved payment records",
+        result:
+          "Eliminated accounting discrepancies, ensuring 100% financial audit accuracy across all pilgrim ledger accounts",
+      },
+      {
+        issue: "Risk of hotel and flight booking forfeiture due to late payment settlements before departure",
+        diagnosis:
+          "Travel agencies must finalize airline and Saudi accommodation bookings at H-60; without automated warnings, delayed pilgrim payments caused cash-flow deficits",
+        repair:
+          "Engineered an automated query scope (scopeBelumLunasDiH60) and dashboard alert module specifically detecting and highlighting accounts due 60 days prior to departure",
+        result:
+          "Prevented quota forfeitures and achieved a 95% on-time payment compliance rate for departure cohorts",
+      },
+      {
+        issue: "Commission disbursement disputes and lack of commission history transparency for marketing agents",
+        diagnosis:
+          "Agents lacked real-time visibility into whether their referred pilgrims had completed payments, causing distrust and delayed payouts",
+        repair:
+          "Implemented an automated commission trigger that generates immutable commission records and in-app notifications immediately upon full payment validation, complete with personal exportable ledgers",
+        result:
+          "Completely eliminated commission payout discrepancies and reduced agent administrative inquiries by 90%",
+      },
+    ],
+  },
+  {
+    id: "013",
     caseNumber: "EDU-001",
     title: "Roblox Game Development Mentorship Program",
     slug: "roblox-mentorship",
@@ -797,6 +916,30 @@ export const projects: ProjectCase[] = [
 
 export const timeline: TimelineEntry[] = [
   {
+    period: "2024 – 2025",
+    company: "KUY Pangandaran",
+    role: "Fullstack Web Engineer & System Architect",
+    location: "Pangandaran, Indonesia (Remote)",
+    type: "Full-Time",
+    summary:
+      "Architected and deployed a production multi-tenant tourism reservation platform featuring OTP check-in security, automated calendar blocking, and Haversine geolocation.",
+    points: [
+      "Engineered Dual-Handshake OTP check-in engine guaranteeing fraud-proof partner payout settlements upon verified physical guest arrival.",
+      "Developed real-time Calendar Occupancy Blocker with 10-minute hold expiry to eliminate double-booking race conditions.",
+      "Built declarative dynamic Admin Resource CRUD engine cutting boilerplate controller code by >70% across 18+ entities.",
+      "Integrated daily bidding sponsorship placement and multi-tier host quota monetization models.",
+    ],
+    technologies: [
+      "Laravel 12",
+      "PHP 8.2+",
+      "MySQL",
+      "Spatie RBAC",
+      "Tailwind CSS",
+      "DomPDF",
+      "Filament Excel",
+    ],
+  },
+  {
     period: "Jul 2025 – Oct 2025",
     company: "LPKIA",
     role: "Mentor PKL — Roblox Game Developer",
@@ -813,19 +956,19 @@ export const timeline: TimelineEntry[] = [
   },
   {
     period: "Jul 2024 – Sep 2024",
-    company: "PT. Alyusro Bandung",
+    company: "Arbain (PT. Alyusro Bandung)",
     role: "Web Developer Intern",
     location: "Bandung, Indonesia",
     type: "Internship",
     summary:
-      "Developed a comprehensive web-based financial ledger and payment administration system using Laravel, PHP, and MySQL.",
+      "Developed a comprehensive web-based financial ledger, pilgrimage management, and payment administration ERP system using Laravel, PHP, MySQL, and Spatie RBAC.",
     points: [
-      "Implemented role-based user authentication and data protection mechanisms.",
-      "Engineered automated agent commission calculations across multiple pilgrimage packages.",
-      "Built interactive financial summary dashboards and automated report generation modules.",
-      "Conducted Black Box functional testing and system debugging to ensure data integrity.",
+      "Implemented multi-role authentication (Admin vs. Agen) and document approval pipelines using Spatie Permission.",
+      "Engineered automated pilgrim balance reconciliation, invoice generation (PDF), and partner agent commission settlements upon complete payment.",
+      "Built interactive Chart.js revenue dashboards with real-time revenue vs. transaction frequency switchers.",
+      "Developed early-warning query filters for 'Kejar Lunas' deadline monitoring (H-60 departure).",
     ],
-    technologies: ["Laravel", "PHP", "MySQL", "Tailwind CSS", "JavaScript"],
+    technologies: ["Laravel", "PHP", "MySQL", "Spatie RBAC", "Bootstrap 5", "Chart.js", "DomPDF"],
   },
   {
     period: "2022 – 2026",

@@ -134,32 +134,48 @@ export default function CaseDetail() {
             </div>
           </div>
 
-          {/* Optional Live Deployment Link */}
-          {project.liveUrl && (
+          {/* Optional Live Deployment & Source Repository Links */}
+          {(project.liveUrl || project.githubUrl) && (
             <div className="mt-5 sm:mt-6 pt-4 border-t border-[#121212] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
               <span className="font-mono text-[11px] sm:text-xs text-[#6B7280]">
                 {project.category === "roblox"
                   ? "ROBLOX EXPERIENCE LINK:"
-                  : "LIVE PRODUCTION URL:"}
+                  : "APPLICATION REPOSITORIES & DEPLOYMENTS:"}
               </span>
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-brutal min-h-[44px] inline-flex items-center justify-center gap-2 bg-[#EA580C] text-white border-2 border-[#121212] px-4 py-2 font-mono text-xs font-black uppercase shadow-brutal-xs hover:bg-[#C2410C] transition-colors"
-              >
-                {project.category === "roblox" ? (
-                  <Gamepad2 className="w-4 h-4" />
-                ) : (
-                  <Globe className="w-4 h-4" />
+              <div className="flex flex-wrap items-center gap-2.5">
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-brutal min-h-[44px] inline-flex items-center justify-center gap-2 bg-[#121212] text-[#FAF7EE] border-2 border-[#121212] px-4 py-2 font-mono text-xs font-black uppercase shadow-brutal-xs hover:bg-[#262626] transition-colors"
+                  >
+                    <FolderGit2 className="w-4 h-4 text-[#FACC15]" />
+                    <span>VIEW SOURCE REPOSITORY</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
                 )}
-                <span>
-                  {project.category === "roblox"
-                    ? "PLAY ON ROBLOX"
-                    : "LAUNCH APPLICATION"}
-                </span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-brutal min-h-[44px] inline-flex items-center justify-center gap-2 bg-[#EA580C] text-white border-2 border-[#121212] px-4 py-2 font-mono text-xs font-black uppercase shadow-brutal-xs hover:bg-[#C2410C] transition-colors"
+                  >
+                    {project.category === "roblox" ? (
+                      <Gamepad2 className="w-4 h-4" />
+                    ) : (
+                      <Globe className="w-4 h-4" />
+                    )}
+                    <span>
+                      {project.category === "roblox"
+                        ? "PLAY ON ROBLOX"
+                        : "LAUNCH APPLICATION"}
+                    </span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                )}
+              </div>
             </div>
           )}
 
@@ -169,6 +185,32 @@ export default function CaseDetail() {
       {/* Main Spec Content */}
       <div className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8 sm:space-y-10">
         
+        {/* Visual Showcase Window (Mockup Frame) */}
+        {project.thumbnail && (
+          <div className="bg-[#FFFFFF] border-2 sm:border-3 border-[#121212] shadow-brutal-sm sm:shadow-brutal-md overflow-hidden">
+            <div className="bg-[#121212] text-white px-3 sm:px-4 py-2 flex items-center justify-between border-b-2 border-[#121212]">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#EF4444] border border-black inline-block" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#FACC15] border border-black inline-block" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#22C55E] border border-black inline-block" />
+                <span className="font-mono text-[10px] sm:text-xs text-[#9CA3AF] ml-2 truncate">
+                  {project.liveUrl || `${project.slug}.module`}
+                </span>
+              </div>
+              <span className="font-mono text-[9px] sm:text-[10px] bg-[#EA580C] text-white px-2 py-0.5 font-bold uppercase">
+                VISUAL ARTIFACT
+              </span>
+            </div>
+            <div className="relative aspect-video max-h-[460px] w-full bg-[#121212] overflow-hidden flex items-center justify-center">
+              <img
+                src={getAssetUrl(project.thumbnail)}
+                alt={project.title}
+                className="w-full h-full object-contain sm:object-cover"
+              />
+            </div>
+          </div>
+        )}
+
         {/* Executive Summary / Game Concept */}
         <div className="bg-[#FFFFFF] border-2 sm:border-3 border-[#121212] shadow-brutal-sm sm:shadow-brutal-md p-4 xs:p-6 sm:p-8 space-y-3">
           <div className="flex items-center gap-2 border-b-2 border-[#121212] pb-3">
@@ -183,6 +225,28 @@ export default function CaseDetail() {
             {project.summary}
           </p>
         </div>
+
+        {/* Technologies Stack */}
+        {project.technologies && project.technologies.length > 0 && (
+          <div className="bg-[#FFFFFF] border-2 sm:border-3 border-[#121212] shadow-brutal-sm sm:shadow-brutal-md p-4 xs:p-6 sm:p-8 space-y-3">
+            <div className="flex items-center gap-2 border-b-2 border-[#121212] pb-3">
+              <Layers className="w-4 h-4 text-[#06B6D4]" />
+              <h2 className="font-mono text-xs sm:text-sm font-black uppercase tracking-wider text-[#121212]">
+                TECHNOLOGY STACK &amp; SYSTEM TOKENS
+              </h2>
+            </div>
+            <div className="flex flex-wrap gap-2 pt-1">
+              {project.technologies.map((tech, idx) => (
+                <span
+                  key={idx}
+                  className="font-mono text-xs sm:text-sm font-extrabold px-3 py-1.5 bg-[#FAF7EE] text-[#121212] border-2 border-[#121212] shadow-brutal-xs hover:bg-[#FACC15] transition-colors"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Core Gameplay Loop / Tower Mechanics (if provided) */}
         {project.gameplayLoop && project.gameplayLoop.length > 0 && (
@@ -259,6 +323,98 @@ export default function CaseDetail() {
               </p>
             </div>
 
+          </div>
+        )}
+
+        {/* Key Engineering Features & Specifications */}
+        {project.features && project.features.length > 0 && (
+          <div className="bg-[#FFFFFF] border-2 sm:border-3 border-[#121212] shadow-brutal-sm sm:shadow-brutal-md p-4 xs:p-6 sm:p-8 space-y-4">
+            <div className="flex items-center justify-between border-b-2 border-[#121212] pb-3">
+              <div className="flex items-center gap-2">
+                <Wrench className="w-4 h-4 text-[#EA580C]" />
+                <h2 className="font-mono text-xs sm:text-sm font-black uppercase tracking-wider text-[#121212]">
+                  KEY ARCHITECTURAL FEATURES &amp; CAPABILITIES
+                </h2>
+              </div>
+              <span className="font-mono text-[9px] sm:text-[10px] bg-[#121212] text-[#FACC15] px-2 py-0.5 font-bold uppercase hidden sm:inline-block">
+                {project.features.length} MODULES SPECIFIED
+              </span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 pt-1">
+              {project.features.map((feature, idx) => (
+                <div
+                  key={idx}
+                  className="bg-[#FAF7EE] border-2 border-[#121212] p-3 sm:p-4 shadow-brutal-xs flex items-start gap-2.5"
+                >
+                  <span className="w-5 h-5 bg-[#22C55E] text-black border border-black flex items-center justify-center font-mono text-xs font-black shrink-0 mt-0.5">
+                    ✓
+                  </span>
+                  <p className="font-mono text-xs sm:text-[13px] text-[#121212] leading-relaxed font-semibold">
+                    {feature}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Engineering Challenges & Post-Mortem Diagnosis */}
+        {project.challenges && project.challenges.length > 0 && (
+          <div className="bg-[#FFFFFF] border-2 sm:border-3 border-[#121212] shadow-brutal-sm sm:shadow-brutal-md p-4 xs:p-6 sm:p-8 space-y-6">
+            <div className="flex items-center justify-between border-b-2 border-[#121212] pb-3">
+              <div className="flex items-center gap-2">
+                <AlertTriangle className="w-4 h-4 text-[#EF4444]" />
+                <h2 className="font-mono text-xs sm:text-sm font-black uppercase tracking-wider text-[#121212]">
+                  ENGINEERING CHALLENGES &amp; POST-MORTEM DIAGNOSIS
+                </h2>
+              </div>
+              <span className="font-mono text-[9px] sm:text-[10px] bg-[#EF4444] text-white px-2 py-0.5 font-bold uppercase hidden sm:inline-block">
+                TRIAGED &amp; RESOLVED
+              </span>
+            </div>
+            <div className="space-y-4">
+              {project.challenges.map((c, idx) => (
+                <div
+                  key={idx}
+                  className="border-2 border-[#121212] bg-[#FAF7EE] p-4 sm:p-5 shadow-brutal-xs space-y-3"
+                >
+                  <div className="flex items-center gap-2 border-b border-[#121212]/20 pb-2">
+                    <span className="font-mono text-[10px] bg-[#121212] text-[#FACC15] px-2 py-0.5 font-bold">
+                      CHALLENGE 0{idx + 1}
+                    </span>
+                    <h3 className="font-mono text-xs sm:text-sm font-black uppercase text-[#121212]">
+                      {c.issue}
+                    </h3>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
+                    <div className="bg-[#FFFFFF] border border-[#121212] p-2.5">
+                      <span className="font-mono text-[9px] font-black uppercase text-[#EF4444] block mb-1">
+                        [01] ROOT CAUSE DIAGNOSIS
+                      </span>
+                      <p className="font-mono text-[11px] sm:text-xs text-[#4B5563] leading-relaxed">
+                        {c.diagnosis}
+                      </p>
+                    </div>
+                    <div className="bg-[#FFFFFF] border border-[#121212] p-2.5">
+                      <span className="font-mono text-[9px] font-black uppercase text-[#06B6D4] block mb-1">
+                        [02] ARCHITECTURAL REPAIR
+                      </span>
+                      <p className="font-mono text-[11px] sm:text-xs text-[#4B5563] leading-relaxed">
+                        {c.repair}
+                      </p>
+                    </div>
+                    <div className="bg-[#FFFFFF] border border-[#121212] p-2.5">
+                      <span className="font-mono text-[9px] font-black uppercase text-[#22C55E] block mb-1">
+                        [03] MEASURED RESULT
+                      </span>
+                      <p className="font-mono text-[11px] sm:text-xs text-[#4B5563] leading-relaxed">
+                        {c.result}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 

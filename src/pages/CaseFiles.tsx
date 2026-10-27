@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import CaseFilesPreview from "@/components/CaseFilesPreview";
+import { projects } from "@/data/projects";
 import { ArrowLeft, FolderGit2 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -21,7 +22,7 @@ export default function CaseFilesPage() {
             </Link>
 
             <span className="font-mono text-[10px] sm:text-xs font-black uppercase bg-[#121212] text-[#FACC15] px-3 py-1.5 border border-black shadow-brutal-xs">
-              TOTAL MODULES: 12 AVAILABLE
+              TOTAL MODULES: {projects.length} AVAILABLE
             </span>
           </div>
 
