@@ -40,7 +40,7 @@ export default function CaseFilesPreview({
     : filteredProjects;
 
   const categories = [
-    { id: "all", label: "ALL MODULES", fullLabel: "ALL MODULES", count: projects.length },
+    { id: "all", label: "ALL", fullLabel: "ALL PROJECTS", count: projects.length },
     {
       id: "roblox",
       label: "🕹️ ROBLOX",
@@ -111,99 +111,169 @@ export default function CaseFilesPreview({
           })}
         </div>
 
-        {/* Project Container: Horizontal Snap Slider on Mobile, Grid on Tablet/Desktop */}
-        <div className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory sm:snap-none no-scrollbar gap-3.5 sm:gap-4 pb-4 sm:pb-0 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 -mx-3 px-3 sm:mx-0 sm:px-0">
-          {displayedProjects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.02 }}
-              viewport={{ once: true }}
-              className="w-[72vw] xs:w-[240px] max-w-[270px] shrink-0 snap-center sm:snap-align-none sm:w-auto sm:max-w-none sm:shrink group flex flex-col"
-            >
-              <div className="bg-[#FFFFFF] border-2 sm:border-3 border-[#121212] shadow-brutal-sm sm:shadow-brutal-xs card-brutal-hover flex flex-col h-full overflow-hidden">
-                
-                {/* Card Top Header Bar */}
-                <div className="bg-[#121212] text-white px-2.5 py-1.5 flex items-center justify-between border-b-2 border-[#121212]">
-                  <span className="font-mono text-[10px] font-bold text-[#FACC15]">
-                    {project.caseNumber}
-                  </span>
-
-                  {/* Category Pill */}
-                  <span
-                    className={`font-mono text-[8px] sm:text-[9px] font-black uppercase px-1.5 py-0.5 border border-black ${
-                      project.category === "roblox"
-                        ? "bg-[#FACC15] text-[#121212]"
-                        : project.category === "web"
-                        ? "bg-[#06B6D4] text-[#121212]"
-                        : "bg-[#22C55E] text-[#121212]"
-                    }`}
-                  >
-                    {project.category}
-                  </span>
-                </div>
-
-                {/* Thumbnail / Visual Window */}
-                <div className="relative aspect-square bg-[#121212] border-b-2 border-[#121212] overflow-hidden flex items-center justify-center">
-                  {project.thumbnail ? (
-                    <img
-                      src={getAssetUrl(project.thumbnail)}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-[#121212] text-white p-3 flex flex-col justify-between text-center">
-                      <div className="flex items-center gap-1 text-[9px] font-mono text-[#FACC15]">
-                        {project.category === "web" ? (
-                          <Code2 className="w-3.5 h-3.5 text-[#06B6D4]" />
-                        ) : (
-                          <GraduationCap className="w-3.5 h-3.5 text-[#22C55E]" />
-                        )}
-                        <span className="font-bold">{project.category.toUpperCase()} MODULE</span>
-                      </div>
-                      <div className="text-center my-auto py-1">
-                        <p className="font-bold text-xs sm:text-sm font-mono text-[#FAF7EE] line-clamp-2">
-                          {project.title}
-                        </p>
-                      </div>
-                      <div className="font-mono text-[8px] text-[#9CA3AF] text-left">
-                        <span>{project.technologies.slice(0, 2).join(" • ")}</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Body Content */}
-                <div className="p-3 sm:p-3 flex flex-col flex-grow justify-between space-y-2.5">
+        {/* Project Container: 3-Col Showcase for Web Apps vs Compact Slider/Grid for Roblox/All */}
+        <div
+          className={
+            selectedCategory === "web"
+              ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+              : "flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory sm:snap-none no-scrollbar gap-3.5 sm:gap-4 pb-4 sm:pb-0 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 -mx-3 px-3 sm:mx-0 sm:px-0"
+          }
+        >
+          {displayedProjects.map((project, index) => {
+            const isWeb = project.category === "web";
+            return (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.02 }}
+                viewport={{ once: true }}
+                className={
+                  selectedCategory === "web"
+                    ? "w-full flex flex-col group"
+                    : isWeb
+                    ? "w-[85vw] xs:w-[320px] max-w-[360px] sm:col-span-2 md:col-span-2 lg:col-span-2 shrink-0 snap-center sm:snap-align-none sm:w-auto sm:max-w-none sm:shrink group flex flex-col"
+                    : "w-[72vw] xs:w-[240px] max-w-[270px] shrink-0 snap-center sm:snap-align-none sm:w-auto sm:max-w-none sm:shrink group flex flex-col"
+                }
+              >
+                <div className="bg-[#FFFFFF] border-2 sm:border-3 border-[#121212] shadow-brutal-sm sm:shadow-brutal-xs card-brutal-hover flex flex-col h-full overflow-hidden">
                   
-                  <div className="space-y-1">
-                    <h3 className="text-xs sm:text-sm font-black uppercase text-[#121212] tracking-tight group-hover:text-[#EA580C] transition-colors line-clamp-1">
-                      {project.title}
-                    </h3>
+                  {/* Card Top Header Bar */}
+                  <div className="bg-[#121212] text-white px-2.5 py-1.5 flex items-center justify-between border-b-2 border-[#121212]">
+                    <div className="flex items-center gap-1.5">
+                      {isWeb && (
+                        <div className="flex items-center gap-1 mr-1">
+                          <span className="w-2 h-2 rounded-full bg-[#EF4444] border border-black inline-block" />
+                          <span className="w-2 h-2 rounded-full bg-[#FACC15] border border-black inline-block" />
+                          <span className="w-2 h-2 rounded-full bg-[#22C55E] border border-black inline-block" />
+                        </div>
+                      )}
+                      <span className="font-mono text-[10px] font-bold text-[#FACC15]">
+                        {project.year}
+                      </span>
+                    </div>
 
-                    <p className="font-mono text-[10px] sm:text-[11px] text-[#4B5563] line-clamp-2 leading-snug">
-                      {project.summary}
-                    </p>
+                    {/* Category Pill */}
+                    <span
+                      className={`font-mono text-[8px] sm:text-[9px] font-black uppercase px-2 py-0.5 border border-black ${
+                        project.category === "roblox"
+                          ? "bg-[#FACC15] text-[#121212]"
+                          : project.category === "web"
+                          ? "bg-[#06B6D4] text-[#121212]"
+                          : "bg-[#22C55E] text-[#121212]"
+                      }`}
+                    >
+                      {project.category === "roblox"
+                        ? "ROBLOX"
+                        : project.category === "web"
+                        ? "WEB APP"
+                        : "MENTORSHIP"}
+                    </span>
                   </div>
 
-                  {/* Action Button */}
-                  <div className="pt-1">
-                    <Link
-                      to={`/case/${project.slug}`}
-                      className="btn-brutal w-full min-h-[38px] flex items-center justify-between bg-[#FACC15] text-[#121212] border-2 border-[#121212] px-3 py-1.5 font-mono text-[11px] font-extrabold shadow-brutal-xs uppercase group-hover:bg-[#121212] group-hover:text-[#FAF7EE] transition-colors"
-                    >
-                      <span>INSPECT</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
+                  {/* Thumbnail / Visual Window */}
+                  <div
+                    className={`relative ${
+                      isWeb ? "aspect-[16/10]" : "aspect-square"
+                    } bg-[#121212] border-b-2 border-[#121212] overflow-hidden flex items-center justify-center`}
+                  >
+                    {project.thumbnail ? (
+                      <img
+                        src={getAssetUrl(project.thumbnail)}
+                        alt={project.title}
+                        className={`w-full h-full ${
+                          isWeb ? "object-cover object-top" : "object-cover"
+                        } group-hover:scale-105 transition-transform duration-300`}
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-[#121212] text-white p-3 flex flex-col justify-between text-center">
+                        <div className="flex items-center gap-1 text-[9px] font-mono text-[#FACC15]">
+                          {project.category === "web" ? (
+                            <Code2 className="w-3.5 h-3.5 text-[#06B6D4]" />
+                          ) : (
+                            <GraduationCap className="w-3.5 h-3.5 text-[#22C55E]" />
+                          )}
+                          <span className="font-bold">
+                            {project.category === "web" ? "WEB APPLICATION" : "MENTORSHIP"}
+                          </span>
+                        </div>
+                        <div className="text-center my-auto py-1">
+                          <p className="font-bold text-xs sm:text-sm font-mono text-[#FAF7EE] line-clamp-2">
+                            {project.title}
+                          </p>
+                        </div>
+                        <div className="font-mono text-[8px] text-[#9CA3AF] text-left">
+                          <span>{project.technologies.slice(0, 2).join(" • ")}</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Body Content */}
+                  <div className={`p-3 ${isWeb ? "sm:p-4" : "sm:p-3"} flex flex-col flex-grow justify-between space-y-3`}>
+                    
+                    <div className="space-y-1.5">
+                      <h3
+                        className={`font-black uppercase text-[#121212] tracking-tight group-hover:text-[#EA580C] transition-colors ${
+                          isWeb ? "text-sm sm:text-base line-clamp-2" : "text-xs sm:text-sm line-clamp-1"
+                        }`}
+                      >
+                        {project.title}
+                      </h3>
+
+                      <p
+                        className={`font-mono text-[#4B5563] leading-snug ${
+                          isWeb ? "text-[11px] sm:text-xs line-clamp-3" : "text-[10px] sm:text-[11px] line-clamp-2"
+                        }`}
+                      >
+                        {project.summary}
+                      </p>
+
+                      {/* For Web Apps: Show Key Tech Badges */}
+                      {isWeb && project.technologies && project.technologies.length > 0 && (
+                        <div className="flex flex-wrap gap-1 pt-1.5">
+                          {project.technologies.slice(0, 4).map((tech, tIdx) => (
+                            <span
+                              key={tIdx}
+                              className="font-mono text-[9px] font-bold px-1.5 py-0.5 bg-[#FAF7EE] text-[#121212] border border-[#121212]"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Action Button */}
+                    <div className="pt-1 flex items-center gap-2">
+                      <Link
+                        to={`/case/${project.slug}`}
+                        className="btn-brutal flex-grow min-h-[38px] flex items-center justify-between bg-[#FACC15] text-[#121212] border-2 border-[#121212] px-3.5 py-1.5 font-mono text-[11px] font-extrabold shadow-brutal-xs uppercase group-hover:bg-[#121212] group-hover:text-[#FAF7EE] transition-colors"
+                      >
+                        <span>INSPECT SPEC</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-brutal min-h-[38px] px-2.5 flex items-center justify-center bg-[#EA580C] text-white border-2 border-[#121212] shadow-brutal-xs hover:bg-[#C2410C] transition-colors shrink-0"
+                          title="Launch Application"
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      )}
+                    </div>
+
                   </div>
 
                 </div>
-
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* View All Footer CTA */}

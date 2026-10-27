@@ -1,6 +1,6 @@
 export interface ProjectCase {
   id: string;
-  caseNumber: string;
+  caseNumber?: string;
   title: string;
   slug: string;
   year: string;

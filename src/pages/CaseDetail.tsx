@@ -75,18 +75,19 @@ export default function CaseDetail() {
                   : "bg-[#22C55E] text-[#121212]"
               }`}
             >
-              {project.category.toUpperCase()} MODULE
+              {project.category === "roblox"
+                ? "ROBLOX EXPERIENCE"
+                : project.category === "web"
+                ? "WEB APPLICATION"
+                : "MENTORSHIP"}
             </span>
           </div>
 
           {/* Title and Identification */}
           <div className="space-y-3 sm:space-y-4">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="font-mono text-[10px] sm:text-xs font-black bg-[#121212] text-[#FACC15] px-2 sm:px-2.5 py-0.5 border border-black">
-                {project.caseNumber}
-              </span>
-              <span className="font-mono text-[10px] sm:text-xs text-[#6B7280]">
-                CLASSIFICATION: {project.classification}
+              <span className="font-mono text-[10px] sm:text-xs font-bold bg-[#121212] text-[#FACC15] px-2.5 py-0.5 border border-black uppercase">
+                {project.classification}
               </span>
             </div>
 
@@ -194,7 +195,7 @@ export default function CaseDetail() {
                 <span className="w-2.5 h-2.5 rounded-full bg-[#FACC15] border border-black inline-block" />
                 <span className="w-2.5 h-2.5 rounded-full bg-[#22C55E] border border-black inline-block" />
                 <span className="font-mono text-[10px] sm:text-xs text-[#9CA3AF] ml-2 truncate">
-                  {project.liveUrl || `${project.slug}.module`}
+                  {project.liveUrl || project.slug}
                 </span>
               </div>
               <span className="font-mono text-[9px] sm:text-[10px] bg-[#EA580C] text-white px-2 py-0.5 font-bold uppercase">
@@ -428,7 +429,7 @@ export default function CaseDetail() {
               <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-[#121212] group-hover:-translate-x-1 transition-transform shrink-0" />
               <div className="text-left overflow-hidden">
                 <span className="font-mono text-[9px] sm:text-[10px] text-[#6B7280] uppercase font-bold block">
-                  PREVIOUS MODULE
+                  PREVIOUS PROJECT
                 </span>
                 <span className="font-mono text-xs font-black uppercase text-[#121212] truncate block">
                   {previousProject.title}
@@ -446,7 +447,7 @@ export default function CaseDetail() {
             >
               <div className="text-right flex-grow overflow-hidden">
                 <span className="font-mono text-[9px] sm:text-[10px] text-[#6B7280] uppercase font-bold block">
-                  NEXT MODULE
+                  NEXT PROJECT
                 </span>
                 <span className="font-mono text-xs font-black uppercase text-[#121212] truncate block">
                   {nextProject.title}

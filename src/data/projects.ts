@@ -13,7 +13,7 @@ export function getAssetUrl(path: string): string {
 
 export interface ProjectCase {
   id: string;
-  caseNumber: string;
+  caseNumber?: string;
   title: string;
   slug: string;
   year: string;
@@ -59,7 +59,6 @@ export const projects: ProjectCase[] = [
   // --- ROBLOX EXPERIENCES ---
   {
     id: "001",
-    caseNumber: "EXP-001",
     title: "Horeg Tower",
     slug: "horeg-tower",
     year: "2025",
@@ -124,7 +123,6 @@ export const projects: ProjectCase[] = [
   },
   {
     id: "002",
-    caseNumber: "EXP-002",
     title: "Mama Tower",
     slug: "mama-tower",
     year: "2025",
@@ -189,7 +187,6 @@ export const projects: ProjectCase[] = [
   },
   {
     id: "003",
-    caseNumber: "EXP-003",
     title: "Mie Gacoan Tower",
     slug: "mie-gacoan-tower",
     year: "2025",
@@ -254,7 +251,6 @@ export const projects: ProjectCase[] = [
   },
   {
     id: "004",
-    caseNumber: "EXP-004",
     title: "Mimi Tower",
     slug: "mimi-tower",
     year: "2025",
@@ -320,7 +316,6 @@ export const projects: ProjectCase[] = [
   },
   {
     id: "005",
-    caseNumber: "EXP-005",
     title: "Nyi Roro Tower",
     slug: "nyi-roro-tower",
     year: "2025",
@@ -387,7 +382,6 @@ export const projects: ProjectCase[] = [
   },
   {
     id: "006",
-    caseNumber: "EXP-006",
     title: "Pacu Jalur Tower",
     slug: "pacu-jalur-tower",
     year: "2025",
@@ -453,7 +447,6 @@ export const projects: ProjectCase[] = [
   },
   {
     id: "007",
-    caseNumber: "EXP-007",
     title: "Papa Tower",
     slug: "papa-tower",
     year: "2025",
@@ -519,7 +512,6 @@ export const projects: ProjectCase[] = [
   },
   {
     id: "008",
-    caseNumber: "EXP-008",
     title: "Takjil Tower",
     slug: "takjil-tower",
     year: "2025",
@@ -586,7 +578,6 @@ export const projects: ProjectCase[] = [
   },
   {
     id: "009",
-    caseNumber: "EXP-009",
     title: "Teacher Tower",
     slug: "teacher-tower",
     year: "2025",
@@ -654,7 +645,6 @@ export const projects: ProjectCase[] = [
   // --- WEB APPLICATIONS & MENTORSHIP ---
   {
     id: "010",
-    caseNumber: "WEB-001",
     title: "Homestay App & Tourism Ecosystem (KUY Pangandaran)",
     slug: "kuy-pangandaran",
     year: "2025",
@@ -726,7 +716,6 @@ export const projects: ProjectCase[] = [
   },
   {
     id: "011",
-    caseNumber: "WEB-002",
     title: "HireScan: Smart E-Recruitment & ATS Platform",
     slug: "e-recruitment-system",
     year: "2025",
@@ -806,7 +795,6 @@ export const projects: ProjectCase[] = [
   },
   {
     id: "012",
-    caseNumber: "WEB-003",
     title: "Arbain: Pilgrimage Management & Financial Accounting ERP",
     slug: "financial-record-system",
     year: "2024",
@@ -876,7 +864,6 @@ export const projects: ProjectCase[] = [
   },
   {
     id: "013",
-    caseNumber: "EDU-001",
     title: "Roblox Game Development Mentorship Program",
     slug: "roblox-mentorship",
     year: "2025",
