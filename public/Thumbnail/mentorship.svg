@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="#334155" opacity="0.6"/>
+    </pattern>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22C55E" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#121212" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="#0F172A"/>
+  <rect width="800" height="400" fill="url(#grid)"/>
+  <rect width="800" height="400" fill="url(#glow)"/>
+
+  <!-- Brutalist Outer Border -->
+  <rect x="12" y="12" width="776" height="376" fill="none" stroke="#22C55E" stroke-width="3"/>
+  <rect x="18" y="18" width="764" height="364" fill="none" stroke="#121212" stroke-width="2"/>
+
+  <!-- Top Terminal Header -->
+  <rect x="22" y="22" width="756" height="36" fill="#121212"/>
+  <circle cx="42" cy="40" r="5" fill="#EF4444"/>
+  <circle cx="58" cy="40" r="5" fill="#FACC15"/>
+  <circle cx="74" cy="40" r="5" fill="#22C55E"/>
+  <text x="96" y="44" fill="#9CA3AF" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="bold">LPKIA_MENTORSHIP_PROGRAM // LUAU_ARCHITECTURE</text>
+  <rect x="680" y="30" width="86" height="20" fill="#22C55E"/>
+  <text x="688" y="44" fill="#121212" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="900">VERIFIED</text>
+
+  <!-- Center Card Graphic -->
+  <g transform="translate(60, 90)">
+    <!-- Badge Graphic Box -->
+    <rect x="0" y="0" width="130" height="130" fill="#121212" stroke="#FACC15" stroke-width="3"/>
+    <rect x="6" y="6" width="118" height="118" fill="#18181B"/>
+    <!-- Graduation Cap / Code Icon -->
+    <path d="M65 35 L105 55 L65 75 L25 55 Z" fill="#22C55E"/>
+    <path d="M38 62 L38 90 C38 102 92 102 92 90 L92 62 L65 75 Z" fill="#16A34A"/>
+    <path d="M105 55 L105 85" stroke="#FACC15" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="105" cy="88" r="4" fill="#FACC15"/>
+    <text x="65" y="116" text-anchor="middle" fill="#FAF7EE" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold">LPKIA PKL</text>
+  </g>
+
+  <!-- Main Headline & Subtitle -->
+  <g transform="translate(220, 115)">
+    <rect x="0" y="0" width="140" height="22" fill="#22C55E"/>
+    <text x="8" y="15" fill="#121212" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="900">CURRICULUM LEAD</text>
+
+    <text x="0" y="55" fill="#FAF7EE" font-family="'Space Grotesk', sans-serif" font-size="32" font-weight="900" letter-spacing="1">ROBLOX GAME DEV</text>
+    <text x="0" y="90" fill="#FACC15" font-family="'Space Grotesk', sans-serif" font-size="28" font-weight="900" letter-spacing="1">MENTORSHIP PROGRAM</text>
+    
+    <text x="0" y="125" fill="#94A3B8" font-family="'JetBrains Mono', monospace" font-size="13">Client-Server Networking • OOP Architecture • Luau Optimization</text>
+  </g>
+
+  <!-- Bottom Pills / Tags -->
+  <g transform="translate(40, 310)">
+    <!-- Pill 1 -->
+    <rect x="0" y="0" width="150" height="32" fill="#121212" stroke="#22C55E" stroke-width="2"/>
+    <text x="14" y="21" fill="#22C55E" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold">⚡ 100% PASS RATE</text>
+
+    <!-- Pill 2 -->
+    <rect x="165" y="0" width="170" height="32" fill="#121212" stroke="#FACC15" stroke-width="2"/>
+    <text x="178" y="21" fill="#FACC15" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold">🛠️ ROBLOX STUDIO</text>
+
+    <!-- Pill 3 -->
+    <rect x="350" y="0" width="150" height="32" fill="#121212" stroke="#38BDF8" stroke-width="2"/>
+    <text x="364" y="21" fill="#38BDF8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold">📦 LUAU OOP / ECS</text>
+
+    <!-- Pill 4 -->
+    <rect x="515" y="0" width="205" height="32" fill="#121212" stroke="#FAF7EE" stroke-width="2"/>
+    <text x="528" y="21" fill="#FAF7EE" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold">🎓 COHORT MENTORING</text>
+  </g>
+</svg>
+

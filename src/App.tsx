@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 import Home from './pages/Home'
 import CaseFiles from './pages/CaseFiles'
 import CaseDetail from './pages/CaseDetail'
+import NotFound from './pages/NotFound'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -26,6 +27,7 @@ function MainLayout() {
           <Route path="/" element={<Home />} />
           <Route path="/case-files" element={<CaseFiles />} />
           <Route path="/case/:slug" element={<CaseDetail />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />

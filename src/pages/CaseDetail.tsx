@@ -24,21 +24,52 @@ export default function CaseDetail() {
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-[#FAF7EE] flex items-center justify-center p-4">
-        <div className="bg-[#FFFFFF] border-3 border-[#121212] shadow-brutal-lg p-8 max-w-md text-center space-y-4">
-          <div className="text-4xl">⚠️</div>
-          <h1 className="text-2xl font-black uppercase text-[#121212]">
-            MODULE NOT FOUND
-          </h1>
-          <p className="font-mono text-xs text-[#4B5563]">
-            The requested project or case specification does not exist in the repository.
-          </p>
-          <Link
-            to="/case-files"
-            className="btn-brutal inline-block bg-[#FACC15] text-[#121212] border-2 border-[#121212] px-4 py-2 font-mono text-xs font-bold uppercase shadow-brutal-xs"
-          >
-            ← Back to Repository
-          </Link>
+      <div className="min-h-screen bg-[#FAF7EE] flex items-center justify-center p-4 bg-arcade-grid">
+        <div className="max-w-lg w-full bg-[#FFFFFF] border-3 sm:border-4 border-[#121212] shadow-brutal-md sm:shadow-brutal-lg overflow-hidden">
+          <div className="bg-[#121212] text-white px-3 py-2 flex items-center justify-between border-b-2 border-[#121212]">
+            <div className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#EF4444] border border-black inline-block" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#FACC15] border border-black inline-block" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#22C55E] border border-black inline-block" />
+              <span className="font-mono text-[10px] text-[#9CA3AF] ml-1 font-bold">
+                ERROR // CASE_SPEC_NOT_FOUND
+              </span>
+            </div>
+            <span className="font-mono text-[9px] font-black uppercase px-2 py-0.5 border border-black bg-[#EF4444] text-white">
+              STATUS: 404
+            </span>
+          </div>
+
+          <div className="p-6 sm:p-8 space-y-4 text-center">
+            <div className="inline-flex items-center gap-2 bg-[#FACC15] text-[#121212] border-2 border-[#121212] px-3 py-1 font-mono text-xs font-black uppercase shadow-brutal-xs">
+              <AlertTriangle className="w-3.5 h-3.5 text-[#EA580C]" />
+              <span>SPESIFIKASI PROYEK TIDAK DITEMUKAN</span>
+            </div>
+
+            <h1 className="text-xl sm:text-2xl font-black uppercase text-[#121212] tracking-tight">
+              MODUL TIDAK ADA DALAM ARSIP
+            </h1>
+
+            <p className="font-mono text-xs sm:text-sm text-[#4B5563] leading-relaxed">
+              Slug spesifikasi proyek <span className="font-bold text-[#121212]">"{slug}"</span> tidak terdaftar dalam repositori data kami atau telah dipindahkan.
+            </p>
+
+            <div className="pt-3 flex flex-col sm:flex-row gap-2.5 justify-center">
+              <Link
+                to="/case-files"
+                className="btn-brutal min-h-[42px] inline-flex items-center justify-center gap-2 bg-[#FACC15] text-[#121212] border-2 border-[#121212] px-4 py-2 font-mono text-xs font-black uppercase shadow-brutal-xs hover:bg-[#121212] hover:text-[#FAF7EE] transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                <span>KEMBALI KE REPOSITORI</span>
+              </Link>
+              <Link
+                to="/"
+                className="btn-brutal min-h-[42px] inline-flex items-center justify-center gap-2 bg-[#FFFFFF] text-[#121212] border-2 border-[#121212] px-4 py-2 font-mono text-xs font-black uppercase shadow-brutal-xs hover:bg-[#FAF7EE] transition-colors"
+              >
+                <span>BERANDA UTAMA</span>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -202,11 +233,11 @@ export default function CaseDetail() {
                 VISUAL ARTIFACT
               </span>
             </div>
-            <div className="relative aspect-video max-h-[460px] w-full bg-[#121212] overflow-hidden flex items-center justify-center">
+            <div className="relative aspect-video max-h-[480px] w-full bg-[#121212] overflow-hidden flex items-center justify-center">
               <img
                 src={getAssetUrl(project.thumbnail)}
                 alt={project.title}
-                className="w-full h-full object-contain sm:object-cover"
+                className="w-full h-full object-contain bg-[#121212]"
               />
             </div>
           </div>

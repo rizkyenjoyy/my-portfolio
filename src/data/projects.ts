@@ -870,7 +870,7 @@ export const projects: ProjectCase[] = [
     status: "Completed",
     category: "mentorship",
     classification: "Technical Mentorship & Education",
-    thumbnail: "",
+    thumbnail: "/Thumbnail/mentorship.svg",
     summary:
       "Structured and led a comprehensive Roblox Studio & Luau programming mentorship curriculum for LPKIA internship students, focusing on client-server networking, OOP, and game architecture.",
     problem:
